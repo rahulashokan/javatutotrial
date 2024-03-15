@@ -250,6 +250,14 @@ GOOD LUCK 😀
 */
 
 /*
+
+const poll = {
+registerNewAnswer (){
+
+} 
+
+}
+
 const poll = {
   question: 'What is your favourite programming language?',
   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
@@ -408,3 +416,11 @@ GOOD LUCK 😀
 })();
 */
 
+const poll = {
+  question: 'What is your favourite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+  registerNewAnswer() {
+    const answer = prompt(`${this.question} \n${this.options.join('\n')}`);
+  },
+};
+poll.registerNewAnswer();

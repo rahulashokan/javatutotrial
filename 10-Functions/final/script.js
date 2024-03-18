@@ -443,3 +443,9 @@ const poll = {
 document
   .querySelector('.poll')
   .addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+(function () {
+  console.log('hi');
+})();
+
+(() => console.log('hi hello'))();

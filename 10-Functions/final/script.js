@@ -425,7 +425,21 @@ const poll = {
       prompt(`${this.question} \n${this.options.join('\n')}`)
     );
     console.log(answer);
-    typeof answer === Number && answer < length.anssers;
+    typeof answer === 'number' &&
+      answer < this.anssers.length &&
+      this.anssers[answer]++;
+    console.log(this.anssers);
+    this.displayresult();
+    this.displayresult('string');
+  },
+  displayresult(type = 'array') {
+    if (type === 'array') {
+      console.log(`${this.anssers}`);
+    } else if (type === 'string') {
+      console.log(`hi ${this.anssers.join(',')}`);
+    }
   },
 };
-poll.registerNewAnswer();
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));

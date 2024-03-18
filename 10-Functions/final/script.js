@@ -449,3 +449,16 @@ document
 })();
 
 (() => console.log('hi hello'))();
+
+const securebooking = function () {
+  let bookingPayment = 200;
+  return function () {
+    bookingPayment++;
+    console.log(`${bookingPayment}`);
+  };
+};
+
+const new_sercure = securebooking();
+new_sercure();
+new_sercure();
+new_sercure();

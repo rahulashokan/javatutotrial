@@ -416,49 +416,71 @@ GOOD LUCK 😀
 })();
 */
 
-const poll = {
-  question: 'What is your favourite programming language?',
-  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
-  anssers: new Array(4).fill(0),
-  registerNewAnswer() {
-    const answer = Number(
-      prompt(`${this.question} \n${this.options.join('\n')}`)
-    );
-    console.log(answer);
-    typeof answer === 'number' &&
-      answer < this.anssers.length &&
-      this.anssers[answer]++;
-    console.log(this.anssers);
-    this.displayresult();
-    this.displayresult('string');
-  },
-  displayresult(type = 'array') {
-    if (type === 'array') {
-      console.log(`${this.anssers}`);
-    } else if (type === 'string') {
-      console.log(`hi ${this.anssers.join(',')}`);
-    }
-  },
-};
-document
-  .querySelector('.poll')
-  .addEventListener('click', poll.registerNewAnswer.bind(poll));
+// const poll = {
+//   question: 'What is your favourite programming language?',
+//   options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+//   anssers: new Array(4).fill(0),
+//   registerNewAnswer() {
+//     const answer = Number(
+//       prompt(`${this.question} \n${this.options.join('\n')}`)
+//     );
+//     console.log(answer);
+//     typeof answer === 'number' &&
+//       answer < this.anssers.length &&
+//       this.anssers[answer]++;
+//     console.log(this.anssers);
+//     this.displayresult();
+//     this.displayresult('string');
+//   },
+//   displayresult(type = 'array') {
+//     if (type === 'array') {
+//       console.log(`${this.anssers}`);
+//     } else if (type === 'string') {
+//       console.log(`hi ${this.anssers.join(',')}`);
+//     }
+//   },
+// };
+// document
+//   .querySelector('.poll')
+//   .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
+// (function () {
+//   console.log('hi');
+// })();
+
+// (() => console.log('hi hello'))();
+
+// const securebooking = function () {
+//   let bookingPayment = 200;
+//   return function () {
+//     bookingPayment++;
+//     console.log(`${bookingPayment}`);
+//   };
+// };
+
+// const new_sercure = securebooking();
+// new_sercure();
+// new_sercure();
+// new_sercure();
+
+// console.dir(new_sercure);
+
+// let f;
+
+// const g = function () {
+//   const a = 100;
+//   f = function () {
+//     console.log(a * 100);
+//   };
+// };
+
+// g();
+// f();
 (function () {
-  console.log('hi');
+  let header = document.querySelector('h1');
+  let colour = 'red';
+  header.style.color = colour;
+  document.querySelector('body').addEventListener('click', function () {
+    header.style.color = 'blue';
+  });
 })();
-
-(() => console.log('hi hello'))();
-
-const securebooking = function () {
-  let bookingPayment = 200;
-  return function () {
-    bookingPayment++;
-    console.log(`${bookingPayment}`);
-  };
-};
-
-const new_sercure = securebooking();
-new_sercure();
-new_sercure();
-new_sercure();

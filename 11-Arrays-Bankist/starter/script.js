@@ -73,21 +73,35 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
+movements.forEach(function (movement, index, arra) {
+  if (movement > 0) {
+    console.log(`Movement ${index + 1}: you deposited ${movement}`);
+  } else {
+    console.log(`Movement ${index + 1}:you widraw ${Math.abs(movement)}`);
+  }
+});
+
+for (const [i, movement] of movements.entries()) {
+  console.log(i + 1, movement);
+}
 /////////////////////////////////////////////////
 
-let arr = ['R', 'A', 'H', 'U', 'L', '@', '009'];
-console.log(arr.slice(2));
+// let arr = ['R', 'A', 'H', 'U', 'L', '@', '009'];
+// console.log(arr.slice(2));
 
-console.log(arr.slice(2, 4));
+// console.log(arr.slice(2, 4));
 
-console.log(arr.slice(-2));
+// console.log(arr.slice(-2));
 
-///splice
+// ///splice
 
-console.log(arr.splice(5));
-console.log([...arr]);
+// console.log(arr.splice(5));
+// console.log([...arr]);
 
-console.log(arr.reverse());
-console.log([...arr]);
-console.log(arr.reverse());
-console.log(arr.join(''));
+// console.log(arr.reverse());
+// console.log([...arr]);
+// console.log(arr.reverse());
+// console.log(arr.join(''));
+// console.log(arr.at(-1));
+// console.log(arr.at(-1));
+// console.log(arr.at());

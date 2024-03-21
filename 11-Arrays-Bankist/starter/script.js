@@ -126,3 +126,19 @@ displayMovement(account1.movements);
 // console.log(arr.at(-1));
 // console.log(arr.at(-1));
 // console.log(arr.at());
+
+const checkdogs = function (dogsJulia, dogsKate) {
+  const newJulia = dogsJulia.slice(1, 3);
+  const dogs = [...newJulia, ...dogsKate];
+  let status;
+  dogs.forEach(function (year, index) {
+    year > 3 ? (status = 'Adult') : (status = 'Puppy');
+    console.log(
+      `Dog number ${index + 1} is an ${status} and is ${year} years old`
+    );
+  });
+};
+
+const dogsJulia1 = [3, 5, 2, 12, 7];
+const dogsKate = [4, 1, 15, 8, 3];
+checkdogs(dogsJulia1, dogsKate);

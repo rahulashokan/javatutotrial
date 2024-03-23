@@ -95,14 +95,15 @@ displayMovement(account1.movements);
 //   console.log(`${value} : ${value}`);
 // });
 
-//const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const euroToIND = 75.77;
+
+const movementIND = movements.map(mov => mov * euroToIND);
+console.log(movementIND);
 
 // movements.forEach(function (movement, index, arra) {
-//   if (movement > 0) {
-//     console.log(`Movement ${index + 1}: you deposited ${movement}`);
-//   } else {
-//     console.log(`Movement ${index + 1}:you widraw ${Math.abs(movement)}`);
-//   }
+//
 // });
 
 /////////////////////////////////////////////////
@@ -127,18 +128,28 @@ displayMovement(account1.movements);
 // console.log(arr.at(-1));
 // console.log(arr.at());
 
-const checkdogs = function (dogsJulia, dogsKate) {
-  const newJulia = dogsJulia.slice(1, 3);
-  const dogs = [...newJulia, ...dogsKate];
-  let status;
-  dogs.forEach(function (year, index) {
-    year > 3 ? (status = 'Adult') : (status = 'Puppy');
-    console.log(
-      `Dog number ${index + 1} is an ${status} and is ${year} years old`
-    );
-  });
-};
+// const checkdogs = function (dogsJulia, dogsKate) {
+//   const newJulia = dogsJulia.slice(1, 3);
+//   const dogs = newJulia.concat(dogsKate);
+//   console.log(dogs);
+//   let status;
+//   dogs.forEach(function (year, index) {
+//     year > 3 ? (status = 'Adult') : (status = 'Puppy');
+//     console.log(
+//       `Dog number ${index + 1} is an ${status} and is ${year} years old`
+//     );
+//   });
+// };
 
-const dogsJulia1 = [3, 5, 2, 12, 7];
-const dogsKate = [4, 1, 15, 8, 3];
-checkdogs(dogsJulia1, dogsKate);
+// const dogsJulia1 = [3, 5, 2, 12, 7];
+// const dogsKate = [4, 1, 15, 8, 3];
+// checkdogs(dogsJulia1, dogsKate);
+
+const movementsDes = movements.map((mov, index, arr) => {
+  if (mov > 0) {
+    return `Movement ${index + 1}: you deposited ${mov}`;
+  } else {
+    return `Movement ${index + 1}:you widraw ${Math.abs(mov)}`;
+  }
+});
+console.log(movementsDes);

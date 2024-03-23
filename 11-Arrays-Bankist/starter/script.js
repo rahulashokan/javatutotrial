@@ -75,6 +75,14 @@ const displayMovement = function (movements) {
   });
 };
 displayMovement(account1.movements);
+
+const user = 'Maya Madhavan TV';
+const newuser = user
+  .toLowerCase()
+  .split(' ')
+  .map(name => name[0]);
+console.log(...newuser);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -145,11 +153,9 @@ console.log(movementIND);
 // const dogsKate = [4, 1, 15, 8, 3];
 // checkdogs(dogsJulia1, dogsKate);
 
-const movementsDes = movements.map((mov, index, arr) => {
-  if (mov > 0) {
-    return `Movement ${index + 1}: you deposited ${mov}`;
-  } else {
-    return `Movement ${index + 1}:you widraw ${Math.abs(mov)}`;
-  }
-});
-console.log(movementsDes);
+// const movementsDes = movements.map(
+//   (mov, index) =>
+//     `Movement ${index + 1}: you ${mov > 0 ? 'Deposit' : 'Withdrawal'}
+//    ${Math.abs(mov)}`
+// );
+// console.log(movementsDes);

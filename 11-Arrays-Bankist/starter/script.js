@@ -87,6 +87,19 @@ const createuser = acc => {
 };
 createuser(accounts);
 
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+console.log(movements);
+console.log(deposits);
+
+const withdrawals = movements.filter(function (mov) {
+  return mov < 0;
+});
+console.log(withdrawals);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -107,12 +120,12 @@ createuser(accounts);
 //   console.log(`${value} : ${value}`);
 // });
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-const euroToIND = 75.77;
+// const euroToIND = 75.77;
 
-const movementIND = movements.map(mov => mov * euroToIND);
-console.log(movementIND);
+// const movementIND = movements.map(mov => mov * euroToIND);
+// console.log(movementIND);
 
 // movements.forEach(function (movement, index, arra) {
 //

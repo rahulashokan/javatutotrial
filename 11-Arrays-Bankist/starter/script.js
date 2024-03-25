@@ -76,12 +76,16 @@ const displayMovement = function (movements) {
 };
 displayMovement(account1.movements);
 
-const user = 'Maya Madhavan TV';
-const newuser = user
-  .toLowerCase()
-  .split(' ')
-  .map(name => name[0]);
-console.log(...newuser);
+const createuser = acc => {
+  acc.forEach(function (accs) {
+    accs.newuser = accs.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+createuser(accounts);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////

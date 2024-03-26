@@ -188,3 +188,16 @@ console.log(maxmov);
 //    ${Math.abs(mov)}`
 // );
 // console.log(movementsDes);
+
+const calcAverageHumanAge = ages => {
+  const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
+  const adultdogs = humanAges.filter(age => age >= 18);
+  console.log(...humanAges);
+  console.log(...adultdogs);
+  const averageHuman = adultdogs.reduce(
+    (acc, age, i, arr) => acc + age / arr.length,
+    0
+  );
+  console.log(averageHuman);
+};
+calcAverageHumanAge([5, 2, 4, 15, 8, 3]);

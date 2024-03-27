@@ -82,6 +82,19 @@ const calcPrintBalance = function (movements) {
 };
 calcPrintBalance(account1.movements);
 
+const displaySummary = movements => {
+  const income = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${income}`;
+
+  const withdrawal = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${withdrawal}`;
+};
+displaySummary(account1.movements);
+
 const createuser = acc => {
   acc.forEach(function (accs) {
     accs.newuser = accs.owner
@@ -99,6 +112,15 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const maxmov = movements.reduce((max, mov) => (max > mov ? max : mov));
 console.log(maxmov);
+
+const rupeeRate = 80;
+///PIPELine method
+const totalRupees = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * rupeeRate)
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalRupees);
 
 // const deposits = movements.filter(mov => mov > 0);
 // console.log(movements);

@@ -86,12 +86,12 @@ const displaySummary = movements => {
   const income = movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${income}`;
+  labelSumIn.textContent = `${income}₹`;
 
   const withdrawal = movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${withdrawal}`;
+  labelSumOut.textContent = `${Math.abs(withdrawal)}₹`;
 };
 displaySummary(account1.movements);
 

@@ -1,5 +1,4 @@
 'use strict';
-
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // BANKIST APP
@@ -96,6 +95,10 @@ const displaySummary = movements => {
   const interest = movements
     .filter(mov => mov > 0)
     .map(deposit => (deposit * 1.2) / 100)
+    .filter((inte, i, arr) => {
+      console.log(arr);
+      return inte >= 1;
+    })
     .reduce((acc, mov) => acc + mov, 0);
   labelSumInterest.textContent = `${Math.abs(interest)}₹`;
 };
@@ -121,12 +124,12 @@ console.log(maxmov);
 
 const rupeeRate = 80;
 ///PIPELine method
-const totalRupees = movements
-  .filter(mov => mov > 0)
-  .map(mov => mov * rupeeRate)
-  .reduce((acc, mov) => acc + mov, 0);
+// const totalRupees = movements
+//   .filter(mov => mov > 0)
+//   .map(mov => mov * rupeeRate)
+//   .reduce((acc, mov) => acc + mov, 0);
 
-console.log(totalRupees);
+// console.log(totalRupees);
 
 // const deposits = movements.filter(mov => mov > 0);
 // console.log(movements);
@@ -229,3 +232,8 @@ const calcAverageHumanAge = ages => {
   console.log(averageHuman);
 };
 calcAverageHumanAge([5, 2, 4, 15, 8, 3]);
+
+const sq = [2000, 1800, 1700, 1900, 1850];
+
+const amount = sq.map(sq => sq * 2200);
+console.log(amount);

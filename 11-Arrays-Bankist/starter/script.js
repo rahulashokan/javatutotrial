@@ -104,9 +104,10 @@ const displaySummary = movements => {
 };
 displaySummary(account1.movements);
 
+//////username creation
 const createuser = acc => {
   acc.forEach(function (accs) {
-    accs.newuser = accs.owner
+    accs.userName = accs.owner
       .toLowerCase()
       .split(' ')
       .map(name => name[0])
@@ -116,8 +117,20 @@ const createuser = acc => {
 createuser(accounts);
 
 calcPrintBalance;
+
+/////user identification
+let currentAccount;
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const currentAccount = accounts.find(
+    acc => acc.userName === inputLoginUsername.value
+  );
+  console.log(`login user is ${currentAccount.owner}`);
+});
+
 ////////
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // const maxmov = movements.reduce((max, mov) => (max > mov ? max : mov));
 // console.log(maxmov);
@@ -146,6 +159,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // const currencies = new Map([
 //   ['USD', 'United States dollar'],
@@ -230,4 +244,4 @@ console.log(findmeth1);
 //console.log(...accounts);
 
 const ownerjonas = accounts.find(owner => owner.owner === 'Jonas Schmedtmann');
-console.log(ownerjonas);
+//console.log(ownerjonas);

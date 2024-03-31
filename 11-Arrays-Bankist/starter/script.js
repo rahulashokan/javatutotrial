@@ -119,10 +119,10 @@ calcPrintBalance;
 ////////
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-const maxmov = movements.reduce((max, mov) => (max > mov ? max : mov));
-console.log(maxmov);
+// const maxmov = movements.reduce((max, mov) => (max > mov ? max : mov));
+// console.log(maxmov);
 
-const rupeeRate = 80;
+// const rupeeRate = 80;
 ///PIPELine method
 // const totalRupees = movements
 //   .filter(mov => mov > 0)
@@ -220,20 +220,14 @@ const rupeeRate = 80;
 // );
 // console.log(movementsDes);
 
-const calcAverageHumanAge = ages => {
-  const humanAges = ages.map(age => (age <= 2 ? 2 * age : 16 + age * 4));
-  const adultdogs = humanAges.filter(age => age >= 18);
-  console.log(...humanAges);
-  console.log(...adultdogs);
-  const averageHuman = adultdogs.reduce(
-    (acc, age, i, arr) => acc + age / arr.length,
-    0
-  );
-  console.log(averageHuman);
-};
-calcAverageHumanAge([5, 2, 4, 15, 8, 3]);
+const findmeth = movements.find(mov => mov + 5);
+const findmeth1 = movements.reduce(mov => mov + 5);
 
-const sq = [2000, 1800, 1700, 1900, 1850];
+console.log(...movements);
+console.log(findmeth);
+console.log(findmeth1);
 
-const amount = sq.map(sq => (sq * 2200) / (20 * 12));
-console.log(...amount);
+//console.log(...accounts);
+
+const ownerjonas = accounts.find(owner => owner.owner === 'Jonas Schmedtmann');
+console.log(ownerjonas);

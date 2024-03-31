@@ -73,13 +73,13 @@ const displayMovement = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovement(account1.movements);
+//displayMovement(account1.movements);
 
 const calcPrintBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov);
   labelBalance.textContent = `${balance} RUP `;
 };
-calcPrintBalance(account1.movements);
+//calcPrintBalance(account1.movements);
 
 const displaySummary = movements => {
   const income = movements
@@ -102,7 +102,7 @@ const displaySummary = movements => {
     .reduce((acc, mov) => acc + mov, 0);
   labelSumInterest.textContent = `${Math.abs(interest)}₹`;
 };
-displaySummary(account1.movements);
+//displaySummary(account1.movements);
 
 //////username creation
 const createuser = acc => {
@@ -131,11 +131,23 @@ btnLogin.addEventListener('click', function (e) {
   console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
-    console.log(`you have login`);
-    inputLoginUsername.value = `${currentAccount.owner}`;
+    /// display welcome message
+
+    labelWelcome.textContent = `Welcome ${currentAccount.owner}`;
+
+    ///calculate movements
+
+    displayMovement(currentAccount.movements);
+
+    ///balance
+
+    calcPrintBalance(currentAccount.movements);
+
+    ///summary
+    displaySummary(currentAccount.movements);
+
     inputLoginPin.value = '';
   } else {
-    inputLoginUsername.value = '';
     inputLoginPin.value = '';
     console.log('wrong credentials');
   }

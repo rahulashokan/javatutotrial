@@ -129,14 +129,11 @@ btnLogin.addEventListener('click', function (e) {
   );
   //console.log(`login user is ${currentAccount.owner}`);
   console.log(currentAccount);
-  if (currentAccount) {
-    if (currentAccount.pin === Number(inputLoginPin.value)) {
-      console.log(`you have login`);
-      inputLoginUsername.value = `${currentAccount.owner}`;
-      inputLoginPin.value = '';
-    } else {
-      console.log('Wrong password');
-    }
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    console.log(`you have login`);
+    inputLoginUsername.value = `${currentAccount.owner}`;
+    inputLoginPin.value = '';
   } else {
     inputLoginUsername.value = '';
     inputLoginPin.value = '';

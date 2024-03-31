@@ -127,7 +127,15 @@ btnLogin.addEventListener('click', function (e) {
   const currentAccount = accounts.find(
     acc => acc.userName === inputLoginUsername.value
   );
-  console.log(`login user is ${currentAccount.owner}`);
+  //console.log(`login user is ${currentAccount.owner}`);
+  console.log(currentAccount);
+  if (currentAccount) {
+    if (currentAccount.pin === Number(inputLoginPin.value)) {
+      console.log(`you have login`);
+    } else {
+      console.log('Wrong password');
+    }
+  } else console.log('wrong credentials');
 });
 
 ////////

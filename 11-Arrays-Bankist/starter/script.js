@@ -235,5 +235,5 @@ calcAverageHumanAge([5, 2, 4, 15, 8, 3]);
 
 const sq = [2000, 1800, 1700, 1900, 1850];
 
-const amount = sq.map(sq => sq * 2200);
-console.log(amount);
+const amount = sq.map(sq => (sq * 2200) / (20 * 12));
+console.log(...amount);

@@ -132,10 +132,16 @@ btnLogin.addEventListener('click', function (e) {
   if (currentAccount) {
     if (currentAccount.pin === Number(inputLoginPin.value)) {
       console.log(`you have login`);
+      inputLoginUsername.value = `${currentAccount.owner}`;
+      inputLoginPin.value = '';
     } else {
       console.log('Wrong password');
     }
-  } else console.log('wrong credentials');
+  } else {
+    inputLoginUsername.value = '';
+    inputLoginPin.value = '';
+    console.log('wrong credentials');
+  }
 });
 
 ////////

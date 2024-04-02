@@ -75,9 +75,9 @@ const displayMovement = function (movements) {
 };
 //displayMovement(account1.movements);
 
-const calcPrintBalance = function (movements) {
-  const balance = movements.reduce((acc, mov) => acc + mov);
-  labelBalance.textContent = `${balance} RUP `;
+const calcPrintBalance = function (acc) {
+  acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${acc.balance} RUP `;
 };
 //calcPrintBalance(account1.movements);
 
@@ -116,7 +116,24 @@ const createuser = acc => {
 };
 createuser(accounts);
 
-calcPrintBalance;
+const updateUI = acc => {
+  /// display welcome message
+  containerApp.style.opacity = 1;
+  inputLoginPin.blur();
+  labelWelcome.textContent = `Welcome ${currentAccount.owner.split(' ')[0]}`;
+
+  ///calculate movements
+
+  displayMovement(currentAccount.movements);
+
+  ///balance
+
+  calcPrintBalance(currentAccount);
+
+  ///summary
+  displaySummary(currentAccount);
+  inputLoginUsername.value = inputLoginPin.value = '';
+};
 
 /////user identification
 let currentAccount;
@@ -124,43 +141,38 @@ let currentAccount;
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const currentAccount = accounts.find(
+  currentAccount = accounts.find(
     acc => acc.userName === inputLoginUsername.value
   );
   //console.log(`login user is ${currentAccount.owner}`);
   console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
-    /// display welcome message
-    containerApp.style.opacity = 1;
-    inputLoginPin.blur();
-    labelWelcome.textContent = `Welcome ${currentAccount.owner.split(' ')[0]}`;
-
-    ///calculate movements
-
-    displayMovement(currentAccount.movements);
-
-    ///balance
-
-    calcPrintBalance(currentAccount.movements);
-
-    ///summary
-    displaySummary(currentAccount);
-    inputLoginUsername.value = inputLoginPin.value = '';
-  } else {
-    inputLoginPin.value = '';
-    console.log('wrong credentials');
-    containerApp.style.opacity = 0;
-  }
+    updateUI(currentAccount);
+  } //else {
+  //   inputLoginPin.value = '';
+  //   console.log('wrong credentials');
+  //   containerApp.style.opacity = 0;
+  // }
 });
 
 btnTransfer.addEventListener('click', function (e) {
   e.preventDefault();
   const amount = Number(inputTransferAmount.value);
-  const receiverAcc = accounts.find(
+  const recveiverAcc = accounts.find(
     acc => acc.userName === inputTransferTo.value
   );
-  console.log(amount, receiverAcc);
+  if (
+    amount > 0 &&
+    recveiverAcc &&
+    currentAccount.balance >= amount &&
+    recveiverAcc.userName !== currentAccount.userName
+  ) {
+    /// doing the transfer
+    currentAccount.movements.push(-amount);
+    recveiverAcc.movements.push(amount);
+    updateUI(currentAccount);
+  }
 });
 
 ////////
@@ -267,12 +279,12 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // );
 // console.log(movementsDes);
 
-const findmeth = movements.find(mov => mov + 5);
-const findmeth1 = movements.reduce(mov => mov + 5);
+// const findmeth = movements.find(mov => mov + 5);
+// const findmeth1 = movements.reduce(mov => mov + 5);
 
-console.log(...movements);
-console.log(findmeth);
-console.log(findmeth1);
+// console.log(...movements);
+// console.log(findmeth);
+// console.log(findmeth1);
 
 //console.log(...accounts);
 

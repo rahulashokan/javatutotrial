@@ -120,11 +120,11 @@ const updateUI = acc => {
   /// display welcome message
   containerApp.style.opacity = 1;
   inputLoginPin.blur();
-  labelWelcome.textContent = `Welcome ${currentAccount.owner.split(' ')[0]}`;
+  labelWelcome.textContent = `Welcome ${acc.owner.split(' ')[0]}`;
 
   ///calculate movements
 
-  displayMovement(currentAccount.movements);
+  displayMovement(acc.movements);
 
   ///balance
 
@@ -162,6 +162,8 @@ btnTransfer.addEventListener('click', function (e) {
   const recveiverAcc = accounts.find(
     acc => acc.userName === inputTransferTo.value
   );
+  inputTransferAmount.value = inputTransferTo.value = '';
+
   if (
     amount > 0 &&
     recveiverAcc &&

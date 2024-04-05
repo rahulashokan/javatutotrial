@@ -191,6 +191,9 @@ btnClose.addEventListener('click', function (e) {
     console.log(index);
     accounts.splice(index, 1);
     console.log(...accounts);
+    //////Hide the UI
+    inputClosePin.value = inputCloseUsername.value = '';
+    containerApp.style.opacity = 0;
   } else {
     console.log(`incorrect user`);
   }

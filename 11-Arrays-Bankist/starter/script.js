@@ -145,7 +145,7 @@ btnLogin.addEventListener('click', function (e) {
     acc => acc.userName === inputLoginUsername.value
   );
   //console.log(`login user is ${currentAccount.owner}`);
-  console.log(currentAccount);
+  // console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     updateUI(currentAccount);
@@ -174,6 +174,25 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.movements.push(-amount);
     recveiverAcc.movements.push(amount);
     updateUI(currentAccount);
+  }
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+  // console.log(currentAccount.pin);
+
+  if (
+    inputCloseUsername?.value === currentAccount.userName &&
+    Number(inputClosePin?.value) === Number(currentAccount.pin)
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.userName === currentAccount.userName
+    );
+    console.log(index);
+    accounts.splice(index, 1);
+    console.log(...accounts);
+  } else {
+    console.log(`incorrect user`);
   }
 });
 

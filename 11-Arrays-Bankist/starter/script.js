@@ -181,10 +181,11 @@ btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
   const loanAmount = Number(inputLoanAmount.value);
   console.log(loanAmount);
-  const confirm = movements.some(mov => mov > (loanAmount * 10) / 100);
-  console.log(confirm);
-  currentAccount.movements.push(loanAmount);
-  updateUI(currentAccount);
+  if (movements.some(mov => loanAmount > 0 && mov > (loanAmount * 10) / 100)) {
+    currentAccount.movements.push(loanAmount);
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
 });
 
 btnClose.addEventListener('click', function (e) {

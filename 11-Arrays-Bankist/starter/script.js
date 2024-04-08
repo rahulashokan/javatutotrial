@@ -100,7 +100,7 @@ const displaySummary = acc => {
       return inte >= 1;
     })
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumInterest.textContent = `${Math.abs(interest)}₹`;
+  labelSumInterest.textContent = `${Math.abs(interest).toFixed(2)}₹`;
 };
 //displaySummary(account1.movements);
 
@@ -177,6 +177,16 @@ btnTransfer.addEventListener('click', function (e) {
   }
 });
 
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const loanAmount = Number(inputLoanAmount.value);
+  console.log(loanAmount);
+  const confirm = movements.some(mov => mov > (loanAmount * 10) / 100);
+  console.log(confirm);
+  currentAccount.movements.push(loanAmount);
+  updateUI(currentAccount);
+});
+
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
   // console.log(currentAccount.pin);
@@ -197,11 +207,6 @@ btnClose.addEventListener('click', function (e) {
   } else {
     console.log(`incorrect user`);
   }
-});
-
-btnLoan.addEventListener('click', function (e) {
-  e.preventDefault();
-  console.log('loan');
 });
 
 ////////

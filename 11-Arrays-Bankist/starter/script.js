@@ -181,7 +181,7 @@ btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
   const loanAmount = Number(inputLoanAmount.value);
   console.log(loanAmount);
-  if (movements.some(mov => loanAmount > 0 && mov > (loanAmount * 10) / 100)) {
+  if (movements.some(mov => loanAmount > 0 && mov >= loanAmount * 0.1)) {
     currentAccount.movements.push(loanAmount);
     updateUI(currentAccount);
   }
@@ -325,3 +325,45 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 const ownerjonas = accounts.find(owner => owner.owner === 'Jonas Schmedtmann');
 //console.log(ownerjonas);
+
+const arr = [1, 2, 3, 3, [[2, 4], 3], [42, 5], 5, 6];
+
+console.log(arr.flat());
+
+console.log(arr.flat(2));
+
+// const movementsacc = accounts.map(mov => mov.movements);
+// console.log(movementsacc);
+// const allMovements = movementsacc.flat();
+// console.log(allMovements);
+// let overallbalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overallbalance);
+//////flat
+let overallbalance = accounts
+  .map(mov => mov.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallbalance);
+
+/////flat map
+overallbalance = accounts
+  .flatMap(mov => mov.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallbalance);
+
+//////sort
+
+const names = ['rahul', 'david', 'akash', 'maya'];
+
+console.log(names.sort());
+
+console.log(movements);
+
+const newMov = movements.sort((a, b) => a - b);
+console.log(newMov);
+
+movements.sort((a, b) => {
+  if (a > b) return 1;
+  if (a < b) return -1;
+});
+console.log(movements);

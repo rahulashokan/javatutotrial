@@ -407,11 +407,23 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // );
 // console.log(randroll);
 
-labelBalance.addEventListener('click', function () {
-  const movementUi = Array.from(
-    document.querySelectorAll('.movements__value'),
-    el => Number(el.textContent)
-  );
+// labelBalance.addEventListener('click', function () {
+//   const movementUi = Array.from(
+//     document.querySelectorAll('.movements__value'),
+//     el => Number(el.textContent)
+//   );
 
-  console.log(movementUi);
-});
+//   console.log(movementUi);
+// });
+
+// const movementlist = accounts
+//   .flatMap(mv => mv.movements)
+//   .filter(mov => mov > 0)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(movementlist);
+
+console.log(
+  accounts
+    .flatMap(mv => mv.movements)
+    .reduce((count, mov) => (mov >= 1000 ? count + 1 : count), 0)
+);

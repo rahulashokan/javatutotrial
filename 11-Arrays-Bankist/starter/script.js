@@ -377,8 +377,41 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // });
 // console.log(movements);
 
-const arr = [1, 2, 3, 5, 6, 7, 7, 8, 8, 9];
+// const arr = [1, 2, 3, 5, 6, 7, 7, 8, 8, 9];
 
-const a = new Array(7);
+// const a = new Array(7);
 
-console.log(a);
+// console.log(a);
+
+// a.fill(1);
+
+// console.log(a);
+
+// a.fill(6, 5, 8);
+
+// console.log(a);
+
+// arr.fill(4, 3, 4);
+// console.log(arr);
+
+/// form
+
+// const b = Array.from({ length: 7 }, () => 1);
+// console.log(b);
+
+// const nr = Array.from({ length: 7 }, (acc, i) => i + 1);
+// console.log(nr);
+
+// const randroll = Array.from({ length: 100 }, (_, i) =>
+//   Math.floor(Math.random() * i)
+// );
+// console.log(randroll);
+
+labelBalance.addEventListener('click', function () {
+  const movementUi = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent)
+  );
+
+  console.log(movementUi);
+});

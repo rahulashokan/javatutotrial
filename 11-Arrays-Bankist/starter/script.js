@@ -427,3 +427,14 @@ console.log(
     .flatMap(mv => mv.movements)
     .reduce((count, mov) => (mov >= 1000 ? count + 1 : count), 0)
 );
+
+const sum = accounts
+  .flatMap(mov => mov.movements)
+  .reduce(
+    (sum, cur) => {
+      cur > 0 ? (sum.deposit += cur) : (sum.widrawal += cur);
+      return sum;
+    },
+    { deposit: 0, widrawal: 0 }
+  );
+console.log(sum);

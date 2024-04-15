@@ -805,6 +805,10 @@ const OkFood = dog =>
 
 console.log(OkFood(dogs));
 
+const dogsorted = dogs.slice().sort((a, b) => a.recoFood - b.recoFood);
+
+console.log(dogsorted);
+
 /*
 const dogs = [
   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },

@@ -798,6 +798,8 @@ console.log(ownersEatTooLittle);
 console.log(`${ownersEatTooLittle.join(' and ')} dogs eat too little`);
 console.log(`${ownersEatTooMuch.join(' and ')} dogs eat too much`);
 
+console.log(dogs.some(dog => dog.curFood === dog.recoFood));
+
 /*
 const dogs = [
   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },

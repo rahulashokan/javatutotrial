@@ -432,9 +432,27 @@ const sum = accounts
   .flatMap(mov => mov.movements)
   .reduce(
     (sum, cur) => {
-      cur > 0 ? (sum.deposit += cur) : (sum.widrawal += cur);
+      //cur > 0 ? (sum.deposit += cur) : (sum.widrawal += cur);
+      sum[cur > 0 ? 'deposit' : 'widrawal'] += cur;
       return sum;
     },
     { deposit: 0, widrawal: 0 }
   );
-console.log(sum);
+//console.log(sum);
+const covTital = tital => {
+  const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with'];
+  const titalArray = tital
+    .toLowerCase()
+    .split(' ')
+    .map(tit =>
+      exceptions.includes(tit) ? tit : tit[0].toUpperCase() + tit.slice(1)
+    );
+  console.log(titalArray);
+};
+
+// console.log(covTital('the name is rahul'));
+// console.log(covTital('SUCCESS is the only WAY OUT'));
+
+// console.log(covTital('dont be a cry baby'));
+
+// console.log(covTital('but be the legend'));

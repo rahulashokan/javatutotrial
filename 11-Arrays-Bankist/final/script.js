@@ -800,6 +800,11 @@ console.log(`${ownersEatTooMuch.join(' and ')} dogs eat too much`);
 
 console.log(dogs.some(dog => dog.curFood === dog.recoFood));
 
+const OkFood = dog =>
+  dog.curFood > dog.recoFood * 0.9 && dog.curFood < dog.recoFood * 1.1;
+
+console.log(OkFood(dogs));
+
 /*
 const dogs = [
   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },

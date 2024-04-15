@@ -470,13 +470,13 @@ const calc
 
 
 */
-const calcAverageHumanAge = ages => {
-  AVGhumanAge = ages
-    .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
-    .filter(age => age >= 18)
-    .reduce((acc, age, i, arr) => (acc + age) / arr.length, 0);
-  console.log(AVGhumanAge);
-};
+// const calcAverageHumanAge = ages => {
+//   AVGhumanAge = ages
+//     .map(age => (age <= 2 ? 2 * age : 16 + age * 4))
+//     .filter(age => age >= 18)
+//     .reduce((acc, age, i, arr) => (acc + age) / arr.length, 0);
+//   console.log(AVGhumanAge);
+// };
 
 // let humanAge = [];
 // const calcAverageHumanAge = ages => {
@@ -490,8 +490,8 @@ const calcAverageHumanAge = ages => {
 //   );
 //   console.log(averageAge);
 // };
-calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
-calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
+// calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
+// calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 
 /*
 const calcAverageHumanAge = function (ages) {
@@ -685,62 +685,62 @@ labelBalance.addEventListener('click', function () {
 // Array Methods Practice
 
 // 1.
-const bankDepositSum = accounts
-  .flatMap(acc => acc.movements)
-  .filter(mov => mov > 0)
-  .reduce((sum, cur) => sum + cur, 0);
+// const bankDepositSum = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov > 0)
+//   .reduce((sum, cur) => sum + cur, 0);
 
-console.log(bankDepositSum);
+// console.log(bankDepositSum);
 
-// 2.
+// // 2.
+// // const numDeposits1000 = accounts
+// //   .flatMap(acc => acc.movements)
+// //   .filter(mov => mov >= 1000).length;
+
 // const numDeposits1000 = accounts
 //   .flatMap(acc => acc.movements)
-//   .filter(mov => mov >= 1000).length;
+//   .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
 
-const numDeposits1000 = accounts
-  .flatMap(acc => acc.movements)
-  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+// console.log(numDeposits1000);
 
-console.log(numDeposits1000);
+// // Prefixed ++ oeprator
+// let a = 10;
+// console.log(++a);
+// console.log(a);
 
-// Prefixed ++ oeprator
-let a = 10;
-console.log(++a);
-console.log(a);
+// // 3.
+// const { deposits, withdrawals } = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce(
+//     (sums, cur) => {
+//       // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+//       sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+//       return sums;
+//     },
+//     { deposits: 0, withdrawals: 0 }
+//   );
 
-// 3.
-const { deposits, withdrawals } = accounts
-  .flatMap(acc => acc.movements)
-  .reduce(
-    (sums, cur) => {
-      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
-      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
-      return sums;
-    },
-    { deposits: 0, withdrawals: 0 }
-  );
+// console.log(deposits, withdrawals);
 
-console.log(deposits, withdrawals);
+// // 4.
+// // this is a nice title -> This Is a Nice Title
+// const convertTitleCase = function (title) {
+//   const capitzalize = str => str[0].toUpperCase() + str.slice(1);
 
-// 4.
-// this is a nice title -> This Is a Nice Title
-const convertTitleCase = function (title) {
-  const capitzalize = str => str[0].toUpperCase() + str.slice(1);
+//   const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
 
-  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+//   const titleCase = title
+//     .toLowerCase()
+//     .split(' ')
+//     .map(word => (exceptions.includes(word) ? word : capitzalize(word)))
+//     .join(' ');
 
-  const titleCase = title
-    .toLowerCase()
-    .split(' ')
-    .map(word => (exceptions.includes(word) ? word : capitzalize(word)))
-    .join(' ');
+//   return capitzalize(titleCase);
+// };
 
-  return capitzalize(titleCase);
-};
-
-console.log(convertTitleCase('this is a nice title'));
-console.log(convertTitleCase('this is a LONG title but not too long'));
-console.log(convertTitleCase('and here is another title with an EXAMPLE'));
+// console.log(convertTitleCase('this is a nice title'));
+// console.log(convertTitleCase('this is a LONG title but not too long'));
+// console.log(convertTitleCase('and here is another title with an EXAMPLE'));
 
 ///////////////////////////////////////
 // Coding Challenge #4
@@ -761,17 +761,42 @@ Eating an okay amount means the dog's current food portion is within a range 10%
 
 HINT 1: Use many different tools to solve these challenges, you can use the summary lecture to choose between them 😉
 HINT 2: Being within a range 10% above and below the recommended portion means: current > (recommended * 0.90) && current < (recommended * 1.10). Basically, the current portion should be between 90% and 110% of the recommended portion.
+*/
 
-TEST DATA:
 const dogs = [
   { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
   { weight: 8, curFood: 200, owners: ['Matilda'] },
   { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
-  { weight: 32, curFood: 340, owners: ['Michael'] }
+  { weight: 32, curFood: 340, owners: ['Michael'] },
 ];
 
-GOOD LUCK 😀
-*/
+dogs.forEach(dog => (dog.recoFood = Math.round(dog.weight ** 0.75 * 28)));
+
+console.log(dogs);
+
+const SarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
+console.log(dogs);
+
+console.log(
+  `Sarah dog is eating  ${
+    SarahDog.curFood > SarahDog.recoFood ? 'too much' : 'too little'
+  }`
+);
+
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recoFood)
+  .flatMap(dog => dog.owners);
+
+console.log(ownersEatTooMuch);
+
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recoFood)
+  .flatMap(dog => dog.owners);
+
+console.log(ownersEatTooLittle);
+
+console.log(`${ownersEatTooLittle.join(' and ')} dogs eat too little`);
+console.log(`${ownersEatTooMuch.join(' and ')} dogs eat too much`);
 
 /*
 const dogs = [

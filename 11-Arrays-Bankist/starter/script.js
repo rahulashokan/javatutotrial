@@ -422,11 +422,11 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //   .reduce((acc, mov) => acc + mov, 0);
 // console.log(movementlist);
 
-console.log(
-  accounts
-    .flatMap(mv => mv.movements)
-    .reduce((count, mov) => (mov >= 1000 ? count + 1 : count), 0)
-);
+// console.log(
+//   accounts
+//     .flatMap(mv => mv.movements)
+//     .reduce((count, mov) => (mov >= 1000 ? count + 1 : count), 0)
+// );
 
 const sum = accounts
   .flatMap(mov => mov.movements)
@@ -456,3 +456,5 @@ const covTital = tital => {
 // console.log(covTital('dont be a cry baby'));
 
 // console.log(covTital('but be the legend'));
+
+const dog = {};

@@ -458,3 +458,19 @@ const covTital = tital => {
 // console.log(covTital('but be the legend'));
 
 const dog = {};
+
+console.log(Number.parseInt('36px', 10));
+
+console.log(Number.parseInt('ps35', 10));
+
+console.log(Number.parseFloat('40.5r', 10));
+
+console.log(Number.isNaN('20'));
+
+console.log(Number.isFinite(20));
+
+console.log(Number.isFinite('20'));
+
+console.log(Number.isFinite(20 / 0));
+
+console.log(Number.isInteger(23));

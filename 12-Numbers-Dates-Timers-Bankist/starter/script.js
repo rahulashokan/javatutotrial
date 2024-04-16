@@ -88,12 +88,19 @@ const displayMovements = function (movements, sort = false) {
 
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
-
+    const movDate = new Date(currentAccount.movementsDates[i]);
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
+        <div class="movements__date">${
+          movDate.toLocaleDateString() +
+          ', ' +
+          movDate.getHours() +
+          ':' +
+          movDate.getMinutes()
+        }</div>
         <div class="movements__value">${mov}€</div>
       </div>
     `;
@@ -155,6 +162,19 @@ const updateUI = function (acc) {
 // Event handlers
 let currentAccount;
 
+///fake login
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.opacity = 100;
+
+const current = new Date();
+labelDate.textContent =
+  current.toLocaleDateString() +
+  ', ' +
+  current.getHours() +
+  ':' +
+  current.getMinutes();
+
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
   e.preventDefault();
@@ -196,6 +216,7 @@ btnTransfer.addEventListener('click', function (e) {
   ) {
     // Doing the transfer
     currentAccount.movements.push(-amount);
+    currentAccount.movementsDates.push(Date());
     receiverAcc.movements.push(amount);
 
     // Update UI
@@ -211,6 +232,7 @@ btnLoan.addEventListener('click', function (e) {
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
     currentAccount.movements.push(amount);
+    currentAccount.movementsDates.push(Date());
 
     // Update UI
     updateUI(currentAccount);
@@ -251,3 +273,5 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
+
+console.log(new Date());

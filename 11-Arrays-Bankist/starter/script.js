@@ -477,3 +477,7 @@ console.log(Number.isInteger(23));
 
 const even = num => (num % 2 <= 0 ? 'even' : 'odd');
 console.log(even(12.5));
+
+const date = new Date();
+
+console.log(date);

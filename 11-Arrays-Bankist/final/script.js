@@ -805,7 +805,7 @@ const OkFood = dog =>
 
 console.log(OkFood(dogs));
 
-const dogsorted = dogs.slice().sort((a, b) => a.recoFood - b.recoFood);
+const dogsorted = dogs.sort((a, b) => a.recoFood - b.recoFood);
 
 console.log(dogsorted);
 

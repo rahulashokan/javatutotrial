@@ -6,7 +6,7 @@
 // Data
 const account1 = {
   owner: 'Jonas Schmedtmann',
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  movements: [200, 450, -400, 3000, -650, -130, 79.97, 1300],
   interestRate: 1.2, // %
   pin: 1111,
 };
@@ -70,7 +70,7 @@ const displayMovement = function (movements, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        <div class="movements__value">${mov}</div>
+        <div class="movements__value">${mov.toFixed(2)}</div>
       </div>`;
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
@@ -79,7 +79,7 @@ const displayMovement = function (movements, sort = false) {
 
 const calcPrintBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance} RUP `;
+  labelBalance.textContent = `${acc.balance.toFixed(2)} RUP `;
 };
 //calcPrintBalance(account1.movements);
 
@@ -87,12 +87,12 @@ const displaySummary = acc => {
   const income = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${income}₹`;
+  labelSumIn.textContent = `${income.toFixed(2)}₹`;
 
   const withdrawal = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(withdrawal)}₹`;
+  labelSumOut.textContent = `${withdrawal.toFixed(2)}₹`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -173,15 +173,15 @@ btnTransfer.addEventListener('click', function (e) {
     recveiverAcc.userName !== currentAccount.userName
   ) {
     /// doing the transfer
-    currentAccount.movements.push(-amount);
-    recveiverAcc.movements.push(amount);
+    currentAccount.movements.push(-amount.toFixed(2));
+    recveiverAcc.movements.push(amount.toFixed(2));
     updateUI(currentAccount);
   }
 });
 
 btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
-  const loanAmount = +inputLoanAmount.value;
+  const loanAmount = inputLoanAmount.value.toFixed(2);
   console.log(loanAmount);
   if (movements.some(mov => loanAmount > 0 && mov >= loanAmount * 0.1)) {
     currentAccount.movements.push(loanAmount);
@@ -474,3 +474,6 @@ console.log(Number.isFinite('20'));
 console.log(Number.isFinite(20 / 0));
 
 console.log(Number.isInteger(23));
+
+const even = num => (num % 2 <= 0 ? 'even' : 'odd');
+console.log(even(12.5));

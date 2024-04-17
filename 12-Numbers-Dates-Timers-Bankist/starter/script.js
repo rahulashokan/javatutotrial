@@ -22,8 +22,8 @@ const account1 = {
     '2020-04-01T10:17:24.185Z',
     '2020-05-08T14:11:59.604Z',
     '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
-    '2020-07-12T10:51:36.790Z',
+    '2024-04-14T23:36:17.929Z',
+    '2024-04-11T10:51:36.790Z',
   ],
   currency: 'EUR',
   locale: 'pt-PT', // de-DE
@@ -80,7 +80,20 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 // Functions
+const formatMovDate = (acc, i) => {
+  const noDates = Math.round(
+    Math.abs(new Date(acc.movementsDates[i]) - new Date()) /
+      (1000 * 60 * 60 * 24)
+  );
+  if (noDates === 0) return 'Today';
+  if (noDates === 1) return 'Yesterday';
+  if (noDates <= 7) return `${noDates} days ago`;
+  else {
+    return new Date(acc.movementsDates[i]).toLocaleDateString();
+  }
+};
 
+formatMovDate(account1);
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -90,7 +103,7 @@ const displayMovements = function (acc, sort = false) {
 
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
-    const movDate = new Date(acc.movementsDates[i]).toLocaleDateString();
+    const movDate = formatMovDate(acc, i);
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${

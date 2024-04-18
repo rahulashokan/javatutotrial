@@ -26,7 +26,7 @@ const account1 = {
     '2024-04-11T10:51:36.790Z',
   ],
   currency: 'EUR',
-  locale: 'pt-PT', // de-DE
+  locale: 'ml-ML', // de-DE
 };
 
 const account2 = {
@@ -185,10 +185,12 @@ const options = {
   year: 'numeric',
   weekday: 'long',
 };
+//const localLang = navigator.language;
 
-labelDate.textContent = new Intl.DateTimeFormat('en-US', options).format(
-  current
-);
+labelDate.textContent = new Intl.DateTimeFormat(
+  currentAccount.locale,
+  options
+).format(current);
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting

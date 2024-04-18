@@ -81,19 +81,19 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // Functions
 const formatMovDate = (acc, i) => {
+  const moveDate = new Date(acc.movementsDates[i]);
+  console.log(acc.movementsDates[0]);
   const noDates = Math.round(
-    Math.abs(new Date(acc.movementsDates[i]) - new Date()) /
-      (1000 * 60 * 60 * 24)
+    Math.abs(moveDate - new Date()) / (1000 * 60 * 60 * 24)
   );
   if (noDates === 0) return 'Today';
   if (noDates === 1) return 'Yesterday';
   if (noDates <= 7) return `${noDates} days ago`;
   else {
-    return new Date(acc.movementsDates[i]).toLocaleDateString();
+    return new Intl.DateTimeFormat(acc.locale).format(moveDate); //Date(acc.movementsDates[i]).toLocaleDateString();
   }
 };
 
-formatMovDate(account1);
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 

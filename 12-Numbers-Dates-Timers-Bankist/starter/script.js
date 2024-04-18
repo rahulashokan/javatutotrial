@@ -177,7 +177,7 @@ updateUI(currentAccount);
 containerApp.style.opacity = 100;
 
 const current = new Date();
-labelDate.textContent = current.toLocaleDateString();
+labelDate.textContent = new Intl.DateTimeFormat('en-ML').format(current);
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting

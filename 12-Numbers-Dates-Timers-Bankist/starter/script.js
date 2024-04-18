@@ -82,7 +82,6 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // Functions
 const formatMovDate = (acc, i) => {
   const moveDate = new Date(acc.movementsDates[i]);
-  console.log(acc.movementsDates[0]);
   const noDates = Math.round(
     Math.abs(moveDate - new Date()) / (1000 * 60 * 60 * 24)
   );

@@ -100,7 +100,7 @@ const formatMovDate = (acc, i) => {
   if (noDates === 1) return 'Yesterday';
   if (noDates <= 7) return `${noDates} days ago`;
   else {
-    return formatter.format(moveDate); //Date(acc.movementsDates[i]).toLocaleDateString();
+    return new Intl.DateTimeFormat(acc.locale).format(moveDate); //Date(acc.movementsDates[i]).toLocaleDateString();
   }
 };
 

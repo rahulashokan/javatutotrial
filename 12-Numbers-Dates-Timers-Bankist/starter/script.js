@@ -291,9 +291,15 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 // LECTURES
 const future = new Date(2024, 4, 11, 22, 45);
-console.log(future);
-console.log(new Date(2024, 4, 20, 23, 43));
+// console.log(future);
+// console.log(new Date(2024, 4, 20, 23, 43));
 
 const calcuDates = (date1, date2) =>
   Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
-console.log(calcuDates(future, new Date(2024, 4, 20, 23, 43)));
+//console.log(calcuDates(future, new Date(2024, 4, 20, 23, 43)));
+
+const num = 123324.24;
+
+console.log('US', new Intl.NumberFormat('en-US').format(num));
+
+console.log('US', new Intl.NumberFormat('en-US').format(num));

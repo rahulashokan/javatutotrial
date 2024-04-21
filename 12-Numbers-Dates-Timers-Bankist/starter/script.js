@@ -90,7 +90,7 @@ const options = {
   style: 'currency',
   currency: 'INR',
 };
-
+const formatter = new Intl.NumberFormat(navigator.language, options);
 const formatMovDate = (acc, i) => {
   const moveDate = new Date(acc.movementsDates[i]);
   const noDates = Math.round(
@@ -100,7 +100,7 @@ const formatMovDate = (acc, i) => {
   if (noDates === 1) return 'Yesterday';
   if (noDates <= 7) return `${noDates} days ago`;
   else {
-    return new Intl.DateTimeFormat(acc.locale).format(moveDate); //Date(acc.movementsDates[i]).toLocaleDateString();
+    return formatter.format(moveDate); //Date(acc.movementsDates[i]).toLocaleDateString();
   }
 };
 
@@ -119,10 +119,7 @@ const displayMovements = function (acc, sort = false) {
       i + 1
     } ${type}</div>
         <div class="movements__date">${movDate}</div>
-        <div class="movements__value"> ${new Intl.NumberFormat(
-          navigator.language,
-          options
-        ).format(mov)}</div>
+        <div class="movements__value"> ${formatter.format(mov)}</div>
       </div>
     `;
 
@@ -132,28 +129,19 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${new Intl.NumberFormat(
-    navigator.language,
-    options
-  ).format(acc.balance)}`;
+  labelBalance.textContent = `${formatter.format(acc.balance)}`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${new Intl.NumberFormat(
-    navigator.language,
-    options
-  ).format(incomes)}`;
+  labelSumIn.textContent = `${formatter.format(incomes)}`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${new Intl.NumberFormat(
-    navigator.language,
-    options
-  ).format(Math.abs(out))}`;
+  labelSumOut.textContent = `${formatter.format(Math.abs(out))}`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -163,10 +151,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${new Intl.NumberFormat(
-    navigator.language,
-    options
-  ).format(interest)}`;
+  labelSumInterest.textContent = `${formatter.format(interest)}`;
 };
 
 const createUsernames = function (accs) {

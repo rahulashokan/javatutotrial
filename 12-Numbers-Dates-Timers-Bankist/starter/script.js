@@ -80,6 +80,17 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 // Functions
+const options = {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  weekday: 'long',
+  style: 'currency',
+  currency: 'INR',
+};
+const formatter = new Intl.NumberFormat(navigator.language, options);
 const formatMovDate = (acc, i) => {
   const moveDate = new Date(acc.movementsDates[i]);
   const noDates = Math.round(
@@ -89,7 +100,7 @@ const formatMovDate = (acc, i) => {
   if (noDates === 1) return 'Yesterday';
   if (noDates <= 7) return `${noDates} days ago`;
   else {
-    return new Intl.DateTimeFormat(acc.locale).format(moveDate); //Date(acc.movementsDates[i]).toLocaleDateString();
+    return formatter.format(moveDate); //Date(acc.movementsDates[i]).toLocaleDateString();
   }
 };
 
@@ -99,7 +110,6 @@ const displayMovements = function (acc, sort = false) {
   const movs = sort
     ? acc.movements.slice().sort((a, b) => a - b)
     : acc.movements;
-
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const movDate = formatMovDate(acc, i);
@@ -109,7 +119,7 @@ const displayMovements = function (acc, sort = false) {
       i + 1
     } ${type}</div>
         <div class="movements__date">${movDate}</div>
-        <div class="movements__value">${mov.toFixed(2)}€</div>
+        <div class="movements__value"> ${formatter.format(mov)}</div>
       </div>
     `;
 
@@ -119,19 +129,19 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  labelBalance.textContent = `${formatter.format(acc.balance)}`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumIn.textContent = `${formatter.format(incomes)}`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
+  labelSumOut.textContent = `${formatter.format(Math.abs(out))}`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -141,7 +151,7 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = `${formatter.format(interest)}`;
 };
 
 const createUsernames = function (accs) {
@@ -176,14 +186,7 @@ updateUI(currentAccount);
 containerApp.style.opacity = 100;
 
 const current = new Date();
-const options = {
-  hour: 'numeric',
-  minute: 'numeric',
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-  weekday: 'long',
-};
+
 //const localLang = navigator.language;
 
 labelDate.textContent = new Intl.DateTimeFormat(

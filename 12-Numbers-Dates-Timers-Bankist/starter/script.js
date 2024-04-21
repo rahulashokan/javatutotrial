@@ -308,3 +308,5 @@ const options2 = {
 console.log('US', new Intl.NumberFormat('en-US', options2).format(num));
 
 console.log('Browser', new Intl.NumberFormat(navigator.language).format(num));
+
+setTimeout(() => console.log('Where is my tupka🍝'), 3000);

@@ -25,7 +25,7 @@ const account1 = {
     '2024-04-14T23:36:17.929Z',
     '2024-04-11T10:51:36.790Z',
   ],
-  currency: 'EUR',
+  currency: 'INR',
   locale: 'ml-ML', // de-DE
 };
 
@@ -245,16 +245,20 @@ btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
   const amount = Number(inputLoanAmount.value);
+  setTimeout(() => {
+    if (
+      amount > 0 &&
+      currentAccount.movements.some(mov => mov >= amount * 0.1)
+    ) {
+      // Add movement
+      currentAccount.movements.push(amount);
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
-    currentAccount.movementsDates.push(new Date().toISOString());
-
-    // Update UI
-    updateUI(currentAccount);
-  }
-  inputLoanAmount.value = '';
+      // Update UI
+      updateUI(currentAccount);
+    }
+    inputLoanAmount.value = '';
+  }, 3500);
 });
 
 btnClose.addEventListener('click', function (e) {
@@ -308,5 +312,3 @@ const options2 = {
 console.log('US', new Intl.NumberFormat('en-US', options2).format(num));
 
 console.log('Browser', new Intl.NumberFormat(navigator.language).format(num));
-
-setTimeout(() => console.log('Where is my tupka🍝'), 3000);

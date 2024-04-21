@@ -300,6 +300,11 @@ const calcuDates = (date1, date2) =>
 
 const num = 123324.24;
 
-console.log('US', new Intl.NumberFormat('en-US').format(num));
+const options2 = {
+  style: 'currency',
+  currency: 'INR',
+};
 
-console.log('US', new Intl.NumberFormat('en-US').format(num));
+console.log('US', new Intl.NumberFormat('en-US', options2).format(num));
+
+console.log('Browser', new Intl.NumberFormat(navigator.language).format(num));

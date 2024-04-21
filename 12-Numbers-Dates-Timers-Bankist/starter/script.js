@@ -167,6 +167,18 @@ const updateUI = function (acc) {
 };
 
 ///////////////////////////////////////
+let time = 300;
+const startTimer = () => {
+  setInterval(() => {
+    const min = String(Math.trunc(time / 60)).padStart(0, 2);
+    const sec = String(Math.trunc(time % 60)).padStart(0, 2);
+
+    labelTimer.textContent = `${min} : ${sec}`;
+
+    time--;
+  }, 1000);
+};
+
 // Event handlers
 let currentAccount;
 
@@ -210,7 +222,7 @@ btnLogin.addEventListener('click', function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
-
+    startTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -312,3 +324,9 @@ const options2 = {
 console.log('US', new Intl.NumberFormat('en-US', options2).format(num));
 
 console.log('Browser', new Intl.NumberFormat(navigator.language).format(num));
+
+// setInterval(() => {
+//   console.log(
+//     `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
+//   );
+// }, 1000);

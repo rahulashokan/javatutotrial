@@ -168,16 +168,18 @@ const updateUI = function (acc) {
 
 ///////////////////////////////////////
 let time = 300;
-const startTimer = () => {
-  setInterval(() => {
-    const min = String(Math.trunc(time / 60)).padStart(0, 2);
-    const sec = String(Math.trunc(time % 60)).padStart(0, 2);
+const startTimer = setInterval(() => {
+  const min = String(Math.trunc(time / 60)).padStart(0, 2);
+  const sec = String(Math.trunc(time % 60)).padStart(0, 2);
 
-    labelTimer.textContent = `${min} : ${sec}`;
+  labelTimer.textContent = `${min} : ${sec}`;
 
-    time--;
-  }, 1000);
-};
+  time--;
+  if (time === 0) {
+    containerApp.style.opacity = 0;
+    clearInterval(startTimer);
+  }
+}, 1000);
 
 // Event handlers
 let currentAccount;

@@ -25,7 +25,7 @@ const account1 = {
     '2024-04-14T23:36:17.929Z',
     '2024-04-11T10:51:36.790Z',
   ],
-  currency: 'EUR',
+  currency: 'INR',
   locale: 'ml-ML', // de-DE
 };
 
@@ -80,17 +80,20 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////////////////////////////
 // Functions
-const options = {
-  hour: 'numeric',
-  minute: 'numeric',
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-  weekday: 'long',
-  style: 'currency',
-  currency: 'INR',
+
+const formatter = function (value, local, currency) {
+  return new Intl.NumberFormat(local, {
+    hour: 'numeric',
+    minute: 'numeric',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    weekday: 'long',
+    style: 'currency',
+    currency: currency,
+  }).format(value);
 };
-const formatter = new Intl.NumberFormat(navigator.language, options);
+
 const formatMovDate = (acc, i) => {
   const moveDate = new Date(acc.movementsDates[i]);
   const noDates = Math.round(
@@ -100,7 +103,7 @@ const formatMovDate = (acc, i) => {
   if (noDates === 1) return 'Yesterday';
   if (noDates <= 7) return `${noDates} days ago`;
   else {
-    return formatter.format(moveDate); //Date(acc.movementsDates[i]).toLocaleDateString();
+    return new Intl.DateTimeFormat(acc.locale).format(moveDate); //Date(acc.movementsDates[i]).toLocaleDateString();
   }
 };
 
@@ -119,7 +122,11 @@ const displayMovements = function (acc, sort = false) {
       i + 1
     } ${type}</div>
         <div class="movements__date">${movDate}</div>
-        <div class="movements__value"> ${formatter.format(mov)}</div>
+        <div class="movements__value"> ${formatter(
+          mov,
+          acc.locale,
+          acc.currency
+        )}</div>
       </div>
     `;
 
@@ -129,19 +136,27 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${formatter.format(acc.balance)}`;
+  labelBalance.textContent = `${formatter(
+    acc.balance,
+    acc.locale,
+    acc.currency
+  )}`;
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${formatter.format(incomes)}`;
+  labelSumIn.textContent = `${formatter(incomes, acc.locale, acc.currency)}`;
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${formatter.format(Math.abs(out))}`;
+  labelSumOut.textContent = `${formatter(
+    Math.abs(out),
+    acc.locale,
+    acc.currency
+  )}`;
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -151,7 +166,11 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${formatter.format(interest)}`;
+  labelSumInterest.textContent = `${formatter(
+    interest,
+    acc.locale,
+    acc.currency
+  )}`;
 };
 
 const createUsernames = function (accs) {
@@ -189,10 +208,14 @@ const current = new Date();
 
 //const localLang = navigator.language;
 
-labelDate.textContent = new Intl.DateTimeFormat(
-  currentAccount.locale,
-  options
-).format(current);
+labelDate.textContent = new Intl.DateTimeFormat(currentAccount.locale, {
+  hour: 'numeric',
+  minute: 'numeric',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  weekday: 'long',
+}).format(current);
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting

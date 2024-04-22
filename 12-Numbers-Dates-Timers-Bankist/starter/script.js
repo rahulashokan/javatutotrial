@@ -180,14 +180,21 @@ const startTimer = function () {
       clearInterval(timer);
     }
   };
-  let time = 300;
+  let time = 100;
 
   tick();
   const timer = setInterval(tick, 1000);
+  console.log(timer);
+  return timer;
 };
 
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
+
+const timeRest = () => {
+  clearInterval(timer);
+  timer = startTimer();
+};
 
 ///fake login
 currentAccount = account1;
@@ -229,7 +236,9 @@ btnLogin.addEventListener('click', function (e) {
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
-    startTimer();
+
+    if (timer) clearInterval(timer);
+    timer = startTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -257,6 +266,7 @@ btnTransfer.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+    timeRest();
   }
 });
 
@@ -275,6 +285,7 @@ btnLoan.addEventListener('click', function (e) {
 
       // Update UI
       updateUI(currentAccount);
+      timeRest();
     }
     inputLoanAmount.value = '';
   }, 3500);
@@ -282,6 +293,7 @@ btnLoan.addEventListener('click', function (e) {
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
+  timeRest();
 
   if (
     inputCloseUsername.value === currentAccount.username &&
@@ -298,6 +310,7 @@ btnClose.addEventListener('click', function (e) {
 
     // Hide UI
     containerApp.style.opacity = 0;
+    timeRest();
   }
 
   inputCloseUsername.value = inputClosePin.value = '';
@@ -306,6 +319,8 @@ btnClose.addEventListener('click', function (e) {
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
+  timeRest();
+
   displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });

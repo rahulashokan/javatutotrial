@@ -196,8 +196,34 @@ const updateUI = function (acc) {
 };
 
 ///////////////////////////////////////
+const startTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    labelTimer.textContent = `${min} : ${sec}`;
+
+    time--;
+    if (time === 0) {
+      containerApp.style.opacity = 0;
+      clearInterval(timer);
+    }
+  };
+  let time = 100;
+
+  tick();
+  const timer = setInterval(tick, 1000);
+  console.log(timer);
+  return timer;
+};
+
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
+
+const timeRest = () => {
+  clearInterval(timer);
+  timer = startTimer();
+};
 
 ///fake login
 currentAccount = account1;
@@ -237,6 +263,8 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    if (timer) clearInterval(timer);
+    timer = startTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -264,6 +292,7 @@ btnTransfer.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+    timeRest();
   }
 });
 
@@ -271,20 +300,26 @@ btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
   const amount = Number(inputLoanAmount.value);
+  setTimeout(() => {
+    if (
+      amount > 0 &&
+      currentAccount.movements.some(mov => mov >= amount * 0.1)
+    ) {
+      // Add movement
+      currentAccount.movements.push(amount);
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
-    currentAccount.movementsDates.push(new Date().toISOString());
-
-    // Update UI
-    updateUI(currentAccount);
-  }
-  inputLoanAmount.value = '';
+      // Update UI
+      updateUI(currentAccount);
+      timeRest();
+    }
+    inputLoanAmount.value = '';
+  }, 3500);
 });
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
+  timeRest();
 
   if (
     inputCloseUsername.value === currentAccount.username &&
@@ -301,6 +336,7 @@ btnClose.addEventListener('click', function (e) {
 
     // Hide UI
     containerApp.style.opacity = 0;
+    timeRest();
   }
 
   inputCloseUsername.value = inputClosePin.value = '';
@@ -309,6 +345,8 @@ btnClose.addEventListener('click', function (e) {
 let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
+  timeRest();
+
   displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
@@ -334,3 +372,9 @@ const options2 = {
 console.log('US', new Intl.NumberFormat('en-US', options2).format(num));
 
 console.log('Browser', new Intl.NumberFormat(navigator.language).format(num));
+
+// setInterval(() => {
+//   console.log(
+//     `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
+//   );
+// }, 1000);

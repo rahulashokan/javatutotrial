@@ -23,9 +23,6 @@ const closeModal = function () {
 
 btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
 
-// for (let i = 0; i < btnsOpenModal.length; i++)
-//   btnsOpenModal[i].addEventListener('click', openModal);
-
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
@@ -36,10 +33,5 @@ document.addEventListener('keydown', function (e) {
 });
 
 btnScrollTo.addEventListener('click', function (e) {
-  const s1coords = Features.getBoundingClientRect();
-  window.scrollTo({
-    left: s1coords.left + window.pageXOffset,
-    top: s1coords.top + window.pageYOffset,
-    behavior: 'smooth',
-  });
+  Features.scrollIntoView({ behavior: 'smooth' });
 });

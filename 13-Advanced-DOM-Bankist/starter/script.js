@@ -37,5 +37,9 @@ document.addEventListener('keydown', function (e) {
 
 btnScrollTo.addEventListener('click', function (e) {
   const s1coords = Features.getBoundingClientRect();
-  window.scrollTo(s1coords.left, s1coords.top + window.pageYOffset);
+  window.scrollTo({
+    left: s1coords.left + window.pageXOffset,
+    top: s1coords.top + window.pageYOffset,
+    behavior: 'smooth',
+  });
 });

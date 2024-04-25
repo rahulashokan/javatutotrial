@@ -35,3 +35,9 @@ document.addEventListener('keydown', function (e) {
 btnScrollTo.addEventListener('click', function (e) {
   Features.scrollIntoView({ behavior: 'smooth' });
 });
+
+const h1 = document.querySelector('h1');
+
+h1.addEventListener('mouseenter', function (e) {
+  alert('AddEventListner  : You are reading the Heading');
+});

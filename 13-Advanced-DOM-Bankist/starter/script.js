@@ -30,8 +30,25 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal();
   }
+});
 
-  const btnScrollTo = doument.querySelector('.btn--scroll-to');
+///learnmore link scroll down
+btnScrollTo.addEventListener('click', function (e) {
+  // const s1coords = section1.getBoundingClientRect();
+  //e.defaultPrevented();
+  console.log('HI');
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+///header links navigation
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  //console.log(e.target);
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
 });
 
 btnScrollTo.addEventListener('click', function (e) {

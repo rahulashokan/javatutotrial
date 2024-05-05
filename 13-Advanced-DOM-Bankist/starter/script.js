@@ -7,6 +7,8 @@ const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -28,6 +30,23 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
     closeModal();
   }
+});
 
-  const btnScrollTo = doument.querySelector('.btn--scroll-to');
+///learnmore link scroll down
+btnScrollTo.addEventListener('click', function (e) {
+  // const s1coords = section1.getBoundingClientRect();
+  //e.defaultPrevented();
+  console.log('HI');
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+///header links navigation
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  //console.log(e.target);
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
 });

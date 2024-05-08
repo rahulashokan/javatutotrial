@@ -9,6 +9,7 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const Features = document.querySelector('#Features');
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -34,9 +35,6 @@ document.addEventListener('keydown', function (e) {
 
 ///learnmore link scroll down
 btnScrollTo.addEventListener('click', function (e) {
-  // const s1coords = section1.getBoundingClientRect();
-  //e.defaultPrevented();
-  console.log('HI');
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 

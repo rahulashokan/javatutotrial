@@ -9,9 +9,9 @@ const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 const btnScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
+const Features = document.querySelector('#Features');
 
-const openModal = function (e) {
-  e.preventDefault();
+const openModal = function () {
   modal.classList.remove('hidden');
   overlay.classList.remove('hidden');
 };
@@ -21,7 +21,8 @@ const closeModal = function () {
   overlay.classList.add('hidden');
 };
 
-btnsOpenModal.forEach(btn => btn.addEventListener('click', openModal));
+for (let i = 0; i < btnsOpenModal.length; i++)
+  btnsOpenModal[i].addEventListener('click', openModal);
 
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
@@ -51,24 +52,31 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 });
 
-btnScrollTo.addEventListener('click', function (e) {
-  Features.scrollIntoView({ behavior: 'smooth' });
+///tab componends
+const tab = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabContent = document.querySelectorAll('.operations__content');
+
+tabsContainer.addEventListener('click', function (e) {
+  const clicked = e.target.closest('.operations__tab');
+  console.log(clicked);
+
+  if (!clicked) return;
+  tab.forEach(id => id.classList.remove('operations__tab--active'));
+  clicked.classList.add('operations__tab--active');
+
+  tabContent.forEach(id => id.classList.remove('operations__content--active'));
+  document
+    .querySelector(`.operations__content--${clicked.dataset.tab}`)
+    .classList.add('operations__content--active');
 });
+
+//////////////////////////////////
 
 // const h1 = document.querySelector('h1');
 
-// h1.addEventListener('mouseenter', function (e) {
-//   e.preventDefault();
-//   alert('AddEventListner  : You are reading the Heading');
-// });
+// console.log(h1.querySelectorAll('.highlight'));
 
-const alertH1 = function (e) {
-  e.preventDefault();
-  alert('You are reading the header');
-};
+// console.log(h1.childNodes);
 
-const h1 = document.querySelector('h1');
-
-h1.addEventListener('mouseenter', alertH1);
-
-setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
+// h1.closest('h1').style.backgroundColor = 'var(--color-primary)';

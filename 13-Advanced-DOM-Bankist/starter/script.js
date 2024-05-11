@@ -69,9 +69,7 @@ tabsContainer.addEventListener('click', function (e) {
     .classList.add('operations__content--active');
 });
 
-///fade
-
-nav.addEventListener('mouseover', function (e) {
+const handleHover = function (e) {
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const hoverOn = link.closest('.nav').querySelectorAll('.nav__link');
@@ -80,27 +78,18 @@ nav.addEventListener('mouseover', function (e) {
     if (!hoverOn) return;
 
     hoverOn.forEach(el => {
-      if (el !== link) el.style.opacity = 0.5;
+      if (el !== link) el.style.opacity = this;
     });
-    logo.style.opacity = 0.5;
+    logo.style.opacity = this;
   }
-  //hoverOn.style.opacity = '.5';
-});
+};
+
+///fade
+nav.addEventListener('mouseover', handleHover.bind(0.5));
 
 ////fade out
 
-nav.addEventListener('mouseout', function (e) {
-  if (e.target.classList.contains('nav__link')) {
-    const link = e.target;
-    const hoverOn = link.closest('.nav').querySelectorAll('.nav__link');
-    const logo = link.closest('.nav').querySelector('img');
-
-    hoverOn.forEach(el => {
-      if (el !== link) el.style.opacity = 100;
-    });
-    logo.style.opacity = 100;
-  }
-});
+nav.addEventListener('mouseout', handleHover.bind(1));
 
 /////////////////////////////'./////
 

@@ -14,6 +14,7 @@ const navLink = document.querySelectorAll('.nav__link');
 const tab = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabContent = document.querySelectorAll('.operations__content');
+const header = document.querySelector('.header');
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -90,16 +91,24 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 ////fade out
 
 nav.addEventListener('mouseout', handleHover.bind(1));
-console.log(window.scrollY);
-////Sticky Navigation
-const initalCord = section1.getBoundingClientRect();
-console.log(initalCord);
-window.addEventListener('scroll', function (e) {
-  console.log(this.window.scrollY);
 
-  if (this.window.scrollY >= initalCord.top) nav.classList.add('sticky');
+////Sticky Navigation
+
+const obCallback = function (entries, observer) {
+  const initalCord = section1.getBoundingClientRect();
+
+  console.log(entries[0].intersectionRatio);
+  if (entries[0].intersectionRatio !== 1) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
-});
+};
+
+const obOptions = {
+  root: null,
+  threshold: [0, 1],
+};
+
+const observer = new IntersectionObserver(obCallback, obOptions);
+observer.observe(header);
 
 /////////////////////////////'./////
 
@@ -110,3 +119,11 @@ window.addEventListener('scroll', function (e) {
 // console.log(h1.childNodes);
 
 // h1.closest('h1').style.backgroundColor = 'var(--color-primary)';
+// const obsCallback = function (entries, observer) {
+//   entries.forEach(entry => console.log(entry));
+// };
+// const obOptions = { root: null, threshold: [0, 0.21] };
+
+// const observer = new IntersectionObserver(obsCallback, obOptions);
+
+// observer.observe(section1);

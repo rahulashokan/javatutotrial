@@ -70,6 +70,7 @@ tabsContainer.addEventListener('click', function (e) {
 });
 
 const handleHover = function (e) {
+  console.log(e);
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const hoverOn = link.closest('.nav').querySelectorAll('.nav__link');

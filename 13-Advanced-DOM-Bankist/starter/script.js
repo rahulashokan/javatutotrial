@@ -97,11 +97,8 @@ console.log(initalCord);
 window.addEventListener('scroll', function (e) {
   console.log(this.window.scrollY);
 
-  if (this.window.scrollY >= initalCord.top) {
-    nav.classList.add('sticky');
-  } else {
-    nav.classList.remove('sticky');
-  }
+  if (this.window.scrollY >= initalCord.top) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
 });
 
 /////////////////////////////'./////

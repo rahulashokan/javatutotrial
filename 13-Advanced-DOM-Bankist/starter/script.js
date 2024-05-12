@@ -94,20 +94,16 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 
 ////Sticky Navigation
 
-const obCallback = function (entries, observer) {
-  const initalCord = section1.getBoundingClientRect();
-
-  console.log(entries[0].intersectionRatio);
-  if (entries[0].intersectionRatio !== 1) nav.classList.add('sticky');
+const obCallback = function (entries) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) nav.classList.add('sticky');
   else nav.classList.remove('sticky');
 };
 
-const obOptions = {
+const observer = new IntersectionObserver(obCallback, {
   root: null,
-  threshold: [0, 1],
-};
-
-const observer = new IntersectionObserver(obCallback, obOptions);
+  threshold: 0,
+});
 observer.observe(header);
 
 /////////////////////////////'./////

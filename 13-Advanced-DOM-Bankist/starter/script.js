@@ -15,6 +15,7 @@ const tab = document.querySelectorAll('.operations__tab');
 const tabsContainer = document.querySelector('.operations__tab-container');
 const tabContent = document.querySelectorAll('.operations__content');
 const header = document.querySelector('.header');
+const navHeight = nav.getBoundingClientRect().height;
 
 const openModal = function () {
   modal.classList.remove('hidden');
@@ -103,6 +104,7 @@ const obCallback = function (entries) {
 const observer = new IntersectionObserver(obCallback, {
   root: null,
   threshold: 0,
+  rootMargin: `-${navHeight}px`,
 });
 observer.observe(header);
 

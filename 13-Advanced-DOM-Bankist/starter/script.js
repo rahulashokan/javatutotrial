@@ -17,6 +17,8 @@ const tabContent = document.querySelectorAll('.operations__content');
 const header = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
 const allSection = document.querySelectorAll('.section');
+const imgTarget = document.querySelectorAll('img[data-src]');
+
 //const allSectionheight = allSection.getBoundingClientRect().height;
 
 const openModal = function () {
@@ -127,16 +129,13 @@ const sectionObserver = new IntersectionObserver(sectionCallback, {
 });
 allSection.forEach(function (section) {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 });
 
 ////lazy Image////
 
-const imgTarget = document.querySelectorAll('img[data-src]');
-
 const imgCallback = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry);
   if (!entry.isIntersecting) return;
   entry.target.src = entry.target.dataset.src;
 
@@ -153,6 +152,46 @@ const imgObserver = new IntersectionObserver(imgCallback, {
 });
 
 imgTarget.forEach(img => imgObserver.observe(img));
+
+///slider////
+
+const slides = document.querySelectorAll('.slide');
+const slider = document.querySelector('.slider');
+const btnRight = document.querySelector('.slider__btn--right');
+const btnLeft = document.querySelector('.slider__btn--left');
+let curSlide = 0;
+const maxSlide = slides.length;
+
+slider.style.overflow = 'visible';
+
+const goToSlide = function (slide) {
+  slides.forEach(
+    (s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)
+  );
+};
+
+goToSlide(0);
+
+//next slide
+const nextSlide = function () {
+  if (curSlide === maxSlide - 1) {
+    curSlide = 0;
+  } else {
+    curSlide++;
+  }
+  goToSlide(curSlide);
+};
+
+const prevSlide = function () {
+  if (curSlide === 0) {
+    curSlide = maxSlide - 1;
+  } else {
+    curSlide--;
+  }
+  goToSlide(curSlide);
+};
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
 
 //////////////////////////////////
 

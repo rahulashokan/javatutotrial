@@ -182,6 +182,7 @@ const activateDot = function (slide) {
     .querySelector(`.dots__dot[data-slide="${slide}"]`)
     .classList.add('dots__dot--active');
 };
+activateDot(0);
 
 const maxSlide = slides.length;
 
@@ -193,8 +194,6 @@ const goToSlide = function (slide) {
   );
   activateDot(slide);
 };
-
-goToSlide(0);
 
 //next slide
 const nextSlide = function () {
@@ -216,6 +215,15 @@ const prevSlide = function () {
   goToSlide(curSlide);
   activateDot(curSlide);
 };
+
+///inital function call
+const init = function () {
+  goToSlide(0);
+  activateDot(0);
+};
+
+init();
+///events
 btnRight.addEventListener('click', nextSlide);
 btnLeft.addEventListener('click', prevSlide);
 document.addEventListener('keydown', function (e) {

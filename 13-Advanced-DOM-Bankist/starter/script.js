@@ -204,6 +204,7 @@ const nextSlide = function () {
     curSlide++;
   }
   goToSlide(curSlide);
+  activateDot(curSlide);
 };
 
 const prevSlide = function () {
@@ -213,6 +214,7 @@ const prevSlide = function () {
     curSlide--;
   }
   goToSlide(curSlide);
+  activateDot(curSlide);
 };
 btnRight.addEventListener('click', nextSlide);
 btnLeft.addEventListener('click', prevSlide);
@@ -224,7 +226,10 @@ document.addEventListener('keydown', function (e) {
 
 dotContainer.addEventListener('click', function (e) {
   let slideId = e.target.dataset.slide;
-  if (e.target.classList.contains('dots__dot')) goToSlide(slideId);
+  if (e.target.classList.contains('dots__dot')) {
+    goToSlide(slideId);
+    activateDot(slideId);
+  }
 });
 
 //////////////////////////////////

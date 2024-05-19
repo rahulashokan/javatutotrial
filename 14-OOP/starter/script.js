@@ -24,3 +24,7 @@ Person.prototype.species = 'Homo sapiens';
 console.log(user.__proto__.__proto__);
 
 console.log(Person.prototype.constructor);
+
+const arr = [3, 4, 5, 6, 2, 5, 7, 5, 2, 4, 6];
+
+console.log(arr.__proto__);

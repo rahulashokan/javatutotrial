@@ -117,14 +117,14 @@ Car.prototype.brake = function () {
 const bmw = new Car('BMW', 120);
 const mercedes = new Car('Mercedes', 95);
 
-bmw.accelerate();
-bmw.accelerate();
-bmw.accelerate();
-bmw.accelerate();
-bmw.brake();
-bmw.brake();
-bmw.brake();
-mercedes.accelerate();
+// bmw.accelerate();
+// bmw.accelerate();
+// bmw.accelerate();
+// bmw.accelerate();
+// bmw.brake();
+// bmw.brake();
+// bmw.brake();
+// mercedes.accelerate();
 
 /*
 const Car = function (make, speed) {
@@ -275,6 +275,40 @@ DATA CAR 1: 'Ford' going at 120 km/h
 
 GOOD LUCK 😀
 */
+
+class Carcl {
+  constructor(make, speed) {
+    (this.make = make), (this.speed = speed);
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(`Accelerated to ${this.speed}`);
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(`Braked to ${this.speed}`);
+  }
+
+  get speedUs() {
+    return this.speed / 1.6;
+  }
+  set speedUs(speed) {
+    this.speed = this.speed * 1.6;
+  }
+}
+const bmw1 = new Carcl('BMW', 120);
+const mercedes2 = new Carcl('Mercedes', 95);
+
+bmw1.accelerate();
+bmw1.accelerate();
+bmw1.accelerate();
+bmw1.accelerate();
+bmw1.brake();
+mercedes2.accelerate();
+bmw1.speedUs = 50;
+bmw1.accelerate();
 
 /*
 class CarCl {

@@ -77,11 +77,15 @@ Student.prototype.introduce = function () {
 
 const rahul = new Student('rahul', 1996, 'Computer science');
 
-console.log(rahul);
-rahul.introduce();
+// console.log(rahul);
+// rahul.introduce();
 
-rahul.calAge();
+// rahul.calAge();
 
 // const user1 = new Person('rosmy', 1994);
 
 // const user2 = new Person('Akash', 1995);
+
+console.log(Student.prototype);
+
+console.log(rahul.__proto__.__proto__);

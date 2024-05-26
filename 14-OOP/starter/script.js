@@ -125,3 +125,33 @@ class student extends Person {
 const rahul = new student('Rahul', 1996, 'comupter science');
 
 rahul.calAge();
+
+////////////Inheritance between class and Object Create/////
+
+const Personprototy = {
+  calcAge() {
+    console.log(2024 - this.year);
+  },
+
+  init(name, year) {
+    this.name = name;
+    this.year = year;
+  },
+};
+
+const akash = Object.create(Personprototy);
+const studentProto = Object.create(Personprototy);
+
+studentProto.init = function (name, year, course) {
+  Personprototy.init.call(this, name, year);
+  this.course = course;
+};
+
+studentProto.introduce = function () {
+  console.log(`Hi i am ${this.name} and i study ${this.course}`);
+};
+
+const maya = Object.create(studentProto);
+maya.init('Maya', 1998, 'Business analysist');
+maya.introduce();
+maya.calcAge();

@@ -186,16 +186,16 @@ class Account {
     console.log(this.#movements);
   }
 
-  _approveLoan(value) {
-    return true;
-  }
-
   loanRequest(value) {
-    if (this._approveLoan(value)) {
+    if (this.#approveLoan(value)) {
       this.deposit(value);
     }
   }
-  /////////////////
+
+  ///private Method
+  #approveLoan(value) {
+    return true;
+  }
 }
 
 const acc1 = new Account('Rahul', 'INR', 1111);

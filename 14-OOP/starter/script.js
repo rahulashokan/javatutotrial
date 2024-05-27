@@ -174,12 +174,23 @@ class Account {
     this.deposit(-value);
   }
   /////////////////
+  approveLoan(value) {
+    return true;
+  }
+
+  requeustLoan(value) {
+    if (this.approveLoan(value)) {
+      console.log(`Loan approved for amount ${value}`);
+      this.deposit(value);
+    }
+  }
 }
 
 const acc1 = new Account('Rahul', 'INR', 1111);
 console.log(acc1);
 acc1.deposit(10);
 acc1.withdraw(200);
+acc1.requeustLoan(1000);
 // acc1.movements.push(445);
 // acc1.movements.push(-45);
 console.log(acc1);

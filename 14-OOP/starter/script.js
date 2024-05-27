@@ -157,13 +157,18 @@
 // maya.calcAge();
 
 class Account {
+  ///private instances
+
+  #movements = [];
+  #pin;
+
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
 
     ////proctected property
-    this._pin = pin;
-    this._movements = [];
+    this.#pin = pin;
+    // this._movements = [];
 
     this.local = navigator.language;
 
@@ -171,10 +176,14 @@ class Account {
   }
   ////public interface of the object
   deposit(value) {
-    this._movements.push(value);
+    this.#movements.push(value);
   }
   withdraw(value) {
     this.deposit(-value);
+  }
+
+  getMovement() {
+    console.log(this.#movements);
   }
 
   _approveLoan(value) {
@@ -196,4 +205,5 @@ acc1.withdraw(200);
 // acc1.movements.push(445);
 // acc1.movements.push(-45);
 acc1.loanRequest(1000);
+acc1.getMovement();
 console.log(acc1);

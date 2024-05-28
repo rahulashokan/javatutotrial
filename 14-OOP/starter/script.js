@@ -214,4 +214,5 @@ const movs = [200, 400, -400, 670, 375];
 
 movs.map(mv => (mv > 0 ? acc1.deposit(mv) : acc1.withdraw(-mv)));
 
+acc1.deposit(445).withdraw(125).deposit(25).withdraw(175);
 acc1.getMovement();

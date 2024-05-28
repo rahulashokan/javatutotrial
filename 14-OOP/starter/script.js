@@ -177,9 +177,11 @@ class Account {
   ////public interface of the object
   deposit(value) {
     this.#movements.push(value);
+    return this;
   }
   withdraw(value) {
     this.deposit(-value);
+    return this;
   }
 
   getMovement() {
@@ -207,3 +209,9 @@ acc1.withdraw(200);
 acc1.loanRequest(1000);
 acc1.getMovement();
 console.log(acc1);
+
+const movs = [200, 400, -400, 670, 375];
+
+movs.map(mv => (mv > 0 ? acc1.deposit(mv) : acc1.withdraw(-mv)));
+
+acc1.getMovement();

@@ -100,9 +100,42 @@ class App {
   }
 
   _newWorkout(e) {
-    e.preventDefault();
-    //// clearing input field
+    const validInput = (...inputs) =>
+      inputs.every(inpts => Number.isFinite(inpts));
 
+    ///positive values check
+
+    const allPositive = (...inputs) => inputs.every(inpts => inpts > 0);
+
+    e.preventDefault();
+    ///////getting data from the form
+    const type = inputType.value;
+    const distance = +inputDistance.value;
+    const duration = +inputDuration.value;
+
+    ////////if type running create running object
+    if (type === 'running') {
+      const cadence = +inputCadence.value;
+
+      //////check if the entered data is valid
+      if (
+        !validInput(distance, duration, cadence) ||
+        !allPositive(distance, duration, cadence)
+      )
+        return alert('Please enter a positive value');
+    }
+    /////if type cylcling  create a cycling object
+    if (type === 'cycling') {
+      const elevation = +inputElevation.value;
+
+      if (
+        !validInput(distance, duration, elevation) ||
+        !allPositive(distance, duration)
+      )
+        return alert('Please enter a positive value');
+      //////check if the entered data is valid
+    }
+    //// clearing input field
     inputCadence.value =
       inputDistance.value =
       inputDuration.value =

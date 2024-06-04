@@ -15,6 +15,7 @@ let map, mapEvent;
 class Workout {
   id = (Date.now() + '').slice(-10);
   date = new Date();
+
   //date();
   constructor(coords, distance, duration) {
     this.coords = coords; ///[ lat, lng]
@@ -59,6 +60,8 @@ console.log(run1, cyc1);
 class App {
   #map;
   #mapEvent;
+  #workOut;
+
   constructor() {
     this._getPosition();
     form.addEventListener('submit', this._newWorkout.bind(this));
@@ -112,7 +115,7 @@ class App {
     const type = inputType.value;
     const distance = +inputDistance.value;
     const duration = +inputDuration.value;
-
+    const { lat, lng } = this.#mapEvent.latlng;
     ////////if type running create running object
     if (type === 'running') {
       const cadence = +inputCadence.value;
@@ -123,6 +126,11 @@ class App {
         !allPositive(distance, duration, cadence)
       )
         return alert('Please enter a positive value');
+
+      //////creating object for the workout
+      this.#workOut = new Running([lat, lng], distance, duration, cadence);
+
+      console.log(this.#workOut);
     }
     /////if type cylcling  create a cycling object
     if (type === 'cycling') {
@@ -134,6 +142,11 @@ class App {
       )
         return alert('Please enter a positive value');
       //////check if the entered data is valid
+
+      ////creating Object
+
+      this.#workOut = new Cycling([lat, lng], distance, duration, elevation);
+      console.log(this.#workOut);
     }
     //// clearing input field
     inputCadence.value =
@@ -142,8 +155,6 @@ class App {
       inputElevation.value =
         '';
 
-    const { lat, lng } = this.#mapEvent.latlng;
-    console.log({ lat, lng });
     L.marker([lat, lng])
       .addTo(this.#map)
       .bindPopup(

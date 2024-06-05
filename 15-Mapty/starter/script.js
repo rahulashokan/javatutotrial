@@ -25,9 +25,10 @@ class Workout {
 }
 
 class Running extends Workout {
-  constructor(coords, distance, duration, cadence) {
+  constructor(coords, distance, duration, cadence, type) {
     super(coords, distance, duration);
     this.cadence = cadence;
+    this.type = type;
     this.calcPace();
   }
   calcPace() {
@@ -38,9 +39,10 @@ class Running extends Workout {
 }
 
 class Cycling extends Workout {
-  constructor(coords, distance, duration, elevGain) {
+  constructor(coords, distance, duration, elevGain, type) {
     super(coords, distance, duration);
     this.elevGain = elevGain;
+    this.type = type;
     this.calcSpeed();
   }
 
@@ -54,14 +56,12 @@ const run1 = new Running([12.942, 77.616], 5, 15, 700);
 
 const cyc1 = new Cycling([12.942, 77.616], 5, 15, 700);
 
-console.log(run1, cyc1);
-
 //////////////////////
 class App {
   #map;
   #mapEvent;
-  #workOut;
-
+  #workout = [];
+  currentDate = new Date().toJSON().slice(0, 10);
   constructor() {
     this._getPosition();
     form.addEventListener('submit', this._newWorkout.bind(this));
@@ -116,6 +116,8 @@ class App {
     const distance = +inputDistance.value;
     const duration = +inputDuration.value;
     const { lat, lng } = this.#mapEvent.latlng;
+    let workout;
+
     ////////if type running create running object
     if (type === 'running') {
       const cadence = +inputCadence.value;
@@ -128,9 +130,9 @@ class App {
         return alert('Please enter a positive value');
 
       //////creating object for the workout
-      this.#workOut = new Running([lat, lng], distance, duration, cadence);
+      workout = new Running([lat, lng], distance, duration, cadence, type);
 
-      console.log(this.#workOut);
+      console.log(workout);
     }
     /////if type cylcling  create a cycling object
     if (type === 'cycling') {
@@ -145,17 +147,22 @@ class App {
 
       ////creating Object
 
-      this.#workOut = new Cycling([lat, lng], distance, duration, elevation);
-      console.log(this.#workOut);
+      workout = new Cycling([lat, lng], distance, duration, elevation, type);
+      console.log(workout);
     }
+
+    this.#workout.push(workout);
+    this._renderWorkout(workout);
+
     //// clearing input field
     inputCadence.value =
       inputDistance.value =
       inputDuration.value =
       inputElevation.value =
         '';
-
-    L.marker([lat, lng])
+  }
+  _renderWorkout(workout) {
+    L.marker(workout.coords)
       .addTo(this.#map)
       .bindPopup(
         L.popup({
@@ -163,10 +170,10 @@ class App {
           minWidth: 50,
           autoClose: false,
           closeOnClick: false,
-          className: 'running-popup',
+          className: `${workout.type}-popup`,
         })
       )
-      .setPopupContent('Marker added')
+      .setPopupContent(`${workout.type} on ${this.currentDate}`)
       .openPopup();
   }
 

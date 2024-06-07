@@ -61,12 +61,15 @@ class App {
   #map;
   #mapEvent;
   #workout = [];
+  #mapZoomLevel = 16;
   currentDate = new Date().toDateString().slice(4, 11);
   constructor() {
     this._getPosition();
     form.addEventListener('submit', this._newWorkout.bind(this));
 
     inputType.addEventListener('change', this._toggleElevationField.bind(this));
+
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this));
   }
 
   _getPosition() {
@@ -86,7 +89,7 @@ class App {
       `https://www.google.com/maps/@${latitude},${longitude},16z?entry=ttu`
     );
     const coords = [latitude, longitude];
-    this.#map = L.map('map').setView(coords, 16);
+    this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution:
@@ -238,6 +241,22 @@ class App {
     `;
 
     form.insertAdjacentHTML('afterend', html);
+  }
+
+  _moveToPopup(e) {
+    const workoutEl = e.target.closest('.workout');
+
+    if (!workoutEl) return;
+
+    const workout = this.#workout.find(
+      work => work.id === workoutEl.dataset.id
+    );
+
+    console.log(workout);
+    this.#map.setView(workout.coords, this.#mapZoomLevel, {
+      animat: true,
+      pan: { duration: 1 },
+    });
   }
 }
 

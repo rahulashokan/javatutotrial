@@ -61,6 +61,7 @@ class App {
   #map;
   #mapEvent;
   #workout = [];
+  #mapZoomLevel = 16;
   currentDate = new Date().toDateString().slice(4, 11);
   constructor() {
     this._getPosition();
@@ -88,7 +89,7 @@ class App {
       `https://www.google.com/maps/@${latitude},${longitude},16z?entry=ttu`
     );
     const coords = [latitude, longitude];
-    this.#map = L.map('map').setView(coords, 16);
+    this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution:
@@ -252,6 +253,10 @@ class App {
     );
 
     console.log(workout);
+    this.#map.setView(workout.coords, this.#mapZoomLevel, {
+      animat: true,
+      pan: { duration: 1 },
+    });
   }
 }
 

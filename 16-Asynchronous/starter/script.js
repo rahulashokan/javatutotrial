@@ -7,7 +7,7 @@ const countriesContainer = document.querySelector('.countries');
 const renderCountry = function (data, countryImg) {
   const html = `
   <article class="country">
-    <img class="country__img" src="${countryImg}" />
+    <img class="country__img" src="${data.flags.svg}" />
     <div class="country__data">
       <h3 class="country__name">${data.name.common}</h3>
       <h4 class="country__region">${data.region}</h4>
@@ -48,11 +48,7 @@ const getCountryAndNeighbour = function (country) {
 
     const neighbour = [...data.borders];
     console.log(neighbour);
-    for (
-      let neighbourcount = 0;
-      neighbourcount < neighbour.length;
-      neighbourcount++
-    ) {
+    for (let neighbourcount = 0; neighbourcount < 3; neighbourcount++) {
       const request2 = new XMLHttpRequest();
       request2.open(
         'get',
@@ -63,7 +59,7 @@ const getCountryAndNeighbour = function (country) {
       request2.addEventListener('load', function () {
         let [neighbourList, _] = JSON.parse(this.responseText);
 
-        console.log(neighbourList.flags.svg);
+        console.log(neighbourList.flags);
         renderCountry(neighbourList, neighbourList.flags.svg);
       });
     }

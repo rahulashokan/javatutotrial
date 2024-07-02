@@ -4,9 +4,9 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 ///////////////////////////////////////
-const renderCountry = function (data, countryImg) {
+const renderCountry = function (data, country = '') {
   const html = `
-  <article class="country">
+  <article class="country ${country}">
     <img class="country__img" src="${data.flags.svg}" />
     <div class="country__data">
       <h3 class="country__name">${data.name.common}</h3>
@@ -60,7 +60,7 @@ const getCountryAndNeighbour = function (country) {
         let [neighbourList, _] = JSON.parse(this.responseText);
 
         console.log(neighbourList.flags);
-        renderCountry(neighbourList, neighbourList.flags.svg);
+        renderCountry(neighbourList, 'neighbour');
       });
     }
   });

@@ -29,6 +29,11 @@ const renderCountry = function (data, country = '') {
   countriesContainer.style.opacity = 1;
 };
 
+const renderError = function (error) {
+  countriesContainer.insertAdjacentHTML('beforeend', error);
+  countriesContainer.style.opacity = 1;
+};
+
 const getcountry = function (country) {
   fetch(`https://restcountries.com/v3.1/name/${country}`)
     .then(response => response.json())
@@ -42,7 +47,7 @@ const getcountry = function (country) {
       console.log(data1);
       renderCountry(data1[0], 'neighbour');
     })
-    .catch(err => alert(err));
+    .catch(error => renderError(error));
 };
 //   request.addEventListener('load', function () {
 //     const [_, data] = JSON.parse(this.responseText);

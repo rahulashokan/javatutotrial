@@ -41,7 +41,8 @@ const getcountry = function (country) {
     .then(data1 => {
       console.log(data1);
       renderCountry(data1[0], 'neighbour');
-    });
+    })
+    .catch(err => alert(err));
 };
 //   request.addEventListener('load', function () {
 //     const [_, data] = JSON.parse(this.responseText);
@@ -82,5 +83,4 @@ const getcountry = function (country) {
 //     .then(response => response.json())
 //     .then(data => renderCountry(data[1]));
 // };
-
-getcountry('India');
+btn.addEventListener('click', () => getcountry('India'));

@@ -243,6 +243,51 @@ TEST COORDINATES 2: -33.933, 18.474
 GOOD LUCK 😀
 */
 
+const whereAmI = function (lat, lang) {
+  fetch(`https://geocode.xyz/${lat},${lang}?geoit=json`)
+    .then(res => res.json())
+    .then(data => {
+      // console.log(`You are in ${data.city} , ${data.country}`);
+      //console.log(data);
+    });
+};
+
+whereAmI(52.508, 13.381);
+
+// const name1 = function (value, searchValue = '') {
+//   const unique = new Set(value);
+//   const uniquevalue = [...unique];
+//   console.log(`${uniquevalue[0]} ${value[0]}`);
+
+//   const length = uniquevalue.length;
+//   console.log(length);
+
+//   for (let i = 0; i <= length; i++) {
+//     let count = 0;
+
+//     for (let j = 0; j <= value.length; j++) {
+//       if (uniquevalue[i] == value[j]) {
+//         count++;
+//       }
+//     }
+//     console.log(`character ${uniquevalue[i]} has count ${count}`);
+//   }
+// };
+
+// name1('akash');
+
+const food = function () {
+  for (let i = 1; i <= 100; i++) {
+    if (i % 15 === 0) {
+      console.log('foobar');
+    } else if (i % 3 === 0) {
+      console.log('foo');
+    } else if (i % 5 === 0) {
+      console.log('bar');
+    } else console.log(i);
+  }
+};
+food();
 /*
 const whereAmI = function (lat, lng) {
   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)

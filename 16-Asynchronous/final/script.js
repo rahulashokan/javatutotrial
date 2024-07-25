@@ -245,14 +245,24 @@ GOOD LUCK 😀
 
 const whereAmI = function (lat, lang) {
   fetch(`https://geocode.xyz/${lat},${lang}?geoit=json`)
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) throw new Error('country not found');
+      return res.json();
+    })
     .then(data => {
-      // console.log(`You are in ${data.city} , ${data.country}`);
-      //console.log(data);
-    });
+      console.log(`You are in ${data.city} , ${data.country}`);
+      console.log(data);
+      return fetch(`https://restcountries.eu/rest/v2/name/${data.country}`);
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('country not found');
+      return res.json();
+    })
+    .then(data => renderCountry(data[1]))
+    .catch(err => console.error(`${err.message}`));
 };
 
-whereAmI(52.508, 13.381);
+whereAmI(-33.933, 18.474);
 
 // const name1 = function (value, searchValue = '') {
 //   const unique = new Set(value);
@@ -276,18 +286,6 @@ whereAmI(52.508, 13.381);
 
 // name1('akash');
 
-const food = function () {
-  for (let i = 1; i <= 100; i++) {
-    if (i % 15 === 0) {
-      console.log('foobar');
-    } else if (i % 3 === 0) {
-      console.log('foo');
-    } else if (i % 5 === 0) {
-      console.log('bar');
-    } else console.log(i);
-  }
-};
-food();
 /*
 const whereAmI = function (lat, lng) {
   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)

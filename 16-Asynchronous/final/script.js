@@ -803,11 +803,29 @@ loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
 // console.log('Test end');
 
 const promisDemo = new Promise(function (resolve, reject) {
-  if (Math.random() >= 0.5) {
-    resolve('You have won the lottery 🎉');
-  }
+  console.log('Lottery has been started');
+  setTimeout(function () {
+    if (Math.random() >= 0.5) {
+      resolve('You have won the lottery 🎉');
+    }
 
-  reject('You have lose the lottery money 💦');
+    reject(new Error('You have lose the lottery money 💦'));
+  }, 3000);
 });
 
 promisDemo.then(res => console.log(res)).catch(err => console.error(err));
+
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+wait(2)
+  .then(() => {
+    console.log('we have waited 2 sec');
+    return wait(2);
+  })
+  .then(() => {
+    console.log('we have waited 4 sec');
+  });

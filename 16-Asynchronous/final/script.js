@@ -241,28 +241,28 @@ TEST COORDINATES 2: 19.037, 72.873
 TEST COORDINATES 2: -33.933, 18.474
 
 GOOD LUCK 😀
-*/
+// */
 
-const whereAmI = function (lat, lang) {
-  fetch(`https://geocode.xyz/${lat},${lang}?geoit=json`)
-    .then(res => {
-      if (!res.ok) throw new Error('country not found');
-      return res.json();
-    })
-    .then(data => {
-      console.log(`You are in ${data.city} , ${data.country}`);
-      console.log(data);
-      return fetch(`https://restcountries.eu/rest/v2/name/${data.country}`);
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('country not found');
-      return res.json();
-    })
-    .then(data => renderCountry(data[1]))
-    .catch(err => console.error(`${err.message}`));
-};
+// const whereAmI = function (lat, lang) {
+//   fetch(`https://geocode.xyz/${lat},${lang}?geoit=json`)
+//     .then(res => {
+//       if (!res.ok) throw new Error('country not found');
+//       return res.json();
+//     })
+//     .then(data => {
+//       console.log(`You are in ${data.city} , ${data.country}`);
+//       console.log(data);
+//       return fetch(`https://restcountries.eu/rest/v2/name/${data.country}`);
+//     })
+//     .then(res => {
+//       if (!res.ok) throw new Error('country not found');
+//       return res.json();
+//     })
+//     .then(data => renderCountry(data[1]))
+//     .catch(err => console.error(`${err.message}`));
+// };
 
-whereAmI(-33.933, 18.474);
+// whereAmI(-33.933, 18.474);
 
 // const name1 = function (value, searchValue = '') {
 //   const unique = new Set(value);
@@ -790,3 +790,24 @@ const loadAll = async function (imgArr) {
 };
 loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
 */
+// console.log('test Start');
+
+// setTimeout(() => console.log('show after zero second'), 0);
+
+// Promise.resolve('Resolved promess 1').then(res => console.log(res));
+
+// Promise.resolve('Resolved promise 2').then(res => {
+//   for (let i = 0; i < 10000000000; i++) {}
+//   console.log(res);
+// });
+// console.log('Test end');
+
+const promisDemo = new Promise(function (resolve, reject) {
+  if (Math.random() >= 0.5) {
+    resolve('You have won the lottery 🎉');
+  }
+
+  reject('You have lose the lottery money 💦');
+});
+
+promisDemo.then(res => console.log(res)).catch(err => console.error(err));

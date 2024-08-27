@@ -8,13 +8,13 @@ const renderCountry = function (data, country = '') {
   <article class="country ${country}">
     <img class="country__img" src="${data.flags.svg}" />
     <div class="country__data">
-      <h3 class="country__name">${data.name.common}</h3>
+      <h3 class="country__name">${data.name}</h3>
       <h4 class="country__region">${data.region}</h4>
       <p class="country__row">
-        <span>👫</span>${(+data.population / 1000000).toFixed(0)}M people
+        <span>👫</span>${(+data.population / 10000000).toFixed(0)}M people
       </p>
       <p class="country__row">
-        <span>🗣️</span>${Object.values(data.languages)}
+        <span>🗣️</span>${data.languages[0].name}
       </p>
       <p class="country__row">
         <span>💰</span>${Object.values(data.currencies)[0].name}
@@ -462,7 +462,7 @@ PART 2
 TEST DATA: Images in the img folder. Test the error handler by passing a wrong image path. Set the network speed to 'Fast 3G' in the dev tools Network tab, otherwise images load too fast.
 
 GOOD LUCK 😀
-*/
+
 const wait = function (seconds) {
   return new Promise(function (resolve) {
     setTimeout(resolve, seconds * 1000);
@@ -936,3 +936,27 @@ loadAll(['img/img-1.jpg', 'img/img-2.jpg', 'img/img-3.jpg']);
 // };
 
 // btn.addEventListener('click', whereAmI);
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI = async function () {
+  const pos = await getPosition();
+
+  const { latitude: lat, longitude: lng } = pos.coords;
+
+  const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+  const dataGeo = await resGeo.json();
+  console.log(dataGeo);
+
+  const res = await fetch(
+    `https://countries-api-836d.onrender.com/countries/name/${dataGeo.country}`
+  );
+  const data = await res.json();
+  console.log(data);
+  renderCountry(data[1]);
+};
+
+whereAmI();

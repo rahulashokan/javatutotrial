@@ -952,17 +952,37 @@ const whereAmI = async function () {
     if (!resGeo.ok) throw new Error('Not able to fetch Geo Location');
 
     const dataGeo = await resGeo.json();
-    console.log(dataGeo);
+    //console.log(dataGeo);
 
     const res = await fetch(
       `https://countries-api-836d.onrender.com/countries/name/${dataGeo.country}`
     );
     if (!res.ok) throw new Error('Not able to fetch country');
     const data = await res.json();
-    console.log(data);
+    //console.log(data);
     renderCountry(data[1]);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 whereAmI();
+
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    const [data1] = await getJson(
+      `https://countries-api-836d.onrender.com/countries/name/${c1}`
+    );
+    const [data2] = await getJson(
+      `https://countries-api-836d.onrender.com/countries/name/${c2}`
+    );
+    const [data3] = await getJson(
+      `https://countries-api-836d.onrender.com/countries/name/${c3}`
+    );
+
+    console.log([data1.capital, data2.capital, data3.capital]);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+get3Countries('India', 'japan', 'china');

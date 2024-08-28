@@ -943,20 +943,26 @@ const getPosition = function () {
 };
 
 const whereAmI = async function () {
-  const pos = await getPosition();
+  try {
+    const pos = await getPosition();
 
-  const { latitude: lat, longitude: lng } = pos.coords;
+    const { latitude: lat, longitude: lng } = pos.coords;
 
-  const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
-  const dataGeo = await resGeo.json();
-  console.log(dataGeo);
+    const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    if (!resGeo.ok) throw new Error('Not able to fetch Geo Location');
 
-  const res = await fetch(
-    `https://countries-api-836d.onrender.com/countries/name/${dataGeo.country}`
-  );
-  const data = await res.json();
-  console.log(data);
-  renderCountry(data[1]);
+    const dataGeo = await resGeo.json();
+    console.log(dataGeo);
+
+    const res = await fetch(
+      `https://countries-api-836d.onrender.com/countries/name/${dataGeo.country}`
+    );
+    if (!res.ok) throw new Error('Not able to fetch country');
+    const data = await res.json();
+    console.log(data);
+    renderCountry(data[1]);
+  } catch (err) {
+    console.log(err);
+  }
 };
-
 whereAmI();

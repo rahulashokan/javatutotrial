@@ -1006,11 +1006,19 @@ const timeout = function (sec) {
   return new Promise(function (_, reject) {
     setTimeout(function () {
       reject(new Error('Request took too long'));
-    }, sec);
+    }, sec * 1000);
   });
 };
 
 Promise.race([
   getJson(`https://countries-api-836d.onrender.com/countries/name/italy`),
-  timeout(2000),
+  timeout(0.9),
 ]).then(res => console.log(res[0]));
+
+Promise.any([
+  // Promise.resolve('Sucess'),
+  Promise.reject('Error'),
+  // Promise.resolve('Another sucess'),
+])
+  .then(res => console.log(res))
+  .catch(err => console.log(new Error(err)));

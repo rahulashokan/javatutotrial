@@ -1001,3 +1001,16 @@ get3Countries('India', 'japan', 'china');
   ]);
   console.log(res1[0]);
 })();
+
+const timeout = function (sec) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error('Request took too long'));
+    }, sec);
+  });
+};
+
+Promise.race([
+  getJson(`https://countries-api-836d.onrender.com/countries/name/italy`),
+  timeout(2000),
+]).then(res => console.log(res[0]));
